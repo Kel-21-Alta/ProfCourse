@@ -19,7 +19,7 @@ export default function Navbar(props) {
                 </a>
               </li>
               <li className={`nav-item`}>
-                <a className="nav-link" type="link" href="/browse-by">
+                <a className="nav-link active" type="link" href="/browse-by">
                   Kursus
                 </a>
               </li>
