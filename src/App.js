@@ -1,6 +1,6 @@
 import React from "react";
 import "assets/scss/style.scss";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+// import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "pages/HomePage";
 
 function App() {
