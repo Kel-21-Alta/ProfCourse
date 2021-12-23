@@ -6,6 +6,7 @@ export default function Button(props) {
   const className = [props.className];
   if (props.isPrimary) className.push("btn-primary");
   if (props.isLarge) className.push("btn-lg");
+  if (props.isLarger) className.push("btn-large-login");
   if (props.isCircle) className.push("btn-lg");
   if (props.isSmall) className.push("btn-sm");
   if (props.isBlock) className.push("btn-block");
@@ -81,6 +82,7 @@ Button.propTypes = {
   isLoading: propTypes.bool,
   isSmall: propTypes.bool,
   isLarge: propTypes.bool,
+  isLarger: propTypes.bool,
   isBlock: propTypes.bool,
   isPrimary: propTypes.bool,
   isCircle: propTypes.bool,
