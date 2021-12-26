@@ -11,6 +11,7 @@ export default function Button(props) {
   if (props.isSmall) className.push("btn-sm");
   if (props.isBlock) className.push("btn-block");
   if (props.isShadow) className.push("btn-shadow");
+  if (props.isButtonLoad) className.push("btn-custom-load");
 
   const onClick = () => {
     if (props.onClick) props.onClick();
@@ -88,4 +89,5 @@ Button.propTypes = {
   isCircle: propTypes.bool,
   isExternal: propTypes.bool,
   hasShadow: propTypes.bool,
+  isButtonLoad: propTypes.bool,
 };
