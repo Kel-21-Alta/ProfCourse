@@ -81,8 +81,8 @@ const Jumbotron = () => {
             </div>
           </div>
         </div>
-        <div className="col-pl-8 ">
-          <div style={{ width: "559px", height: "492px" }}>
+        <div className="col-pl-8">
+          <div style={{ width: "250px", height: "490px" }}>
             <img
               src={BannerFoto}
               style={{ marginTop: "-40px" }}
