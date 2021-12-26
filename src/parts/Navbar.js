@@ -9,7 +9,7 @@ export default function Navbar(props) {
   return (
     <header className="spacing-sm">
       <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <img src={Logo} alt="" srcset="" />
           <button
             className="navbar-toggler"
