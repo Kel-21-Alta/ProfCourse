@@ -70,7 +70,7 @@ export default function LoginPage() {
                         className="w-100 text-right"
                         style={{ fontSize: "14px" }}
                       >
-                        <Button type="link" href="#">
+                        <Button type="link" href="/lupa-password">
                           Lupa password?
                         </Button>
                       </div>

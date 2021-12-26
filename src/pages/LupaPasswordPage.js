@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "assets/images/logo/logo.svg";
-import LoginImage from "assets/images/login/login.svg";
+import LoginImage from "assets/images/login/forgoy.svg";
 import Button from "elements/button";
 import swal from "sweetalert";
 
@@ -27,7 +27,7 @@ export default function LupaPasswordPage() {
                       <img src={Logo} alt="" />
                     </div>
                     <div className="col-md-12 text-center pt-3">
-                      <img src={LoginImage} alt="" width={380} />
+                      <img src={LoginImage} alt="" width={340} />
                     </div>
                     <div className="col-md-12 text-center pt-4">
                       <h5
@@ -40,7 +40,10 @@ export default function LupaPasswordPage() {
                     </div>
                   </div>
                 </div>
-                <div className="login-wrap p-4 p-md-5 pt-5">
+                <div
+                  className="login-wrap p-4 p-md-5"
+                  style={{ marginTop: "80px" }}
+                >
                   <div className="d-flex">
                     <div className="w-100 text-center">
                       <h3 className="mb-4 font-weight-bolder">Lupa Password</h3>
@@ -58,30 +61,20 @@ export default function LupaPasswordPage() {
                         required
                       />
                     </div>
-                    <div className="form-group">
-                      <div
-                        className="w-100 text-right"
-                        style={{ fontSize: "14px" }}
-                      >
-                        <Button type="link" href="#">
-                          Lupa password?
-                        </Button>
-                      </div>
-                    </div>
                     <div className="form-group text-center">
                       <button
                         className="btn btn-primary"
                         style={{ padding: "5px 155px" }}
                         onClick={cobaAlert}
                       >
-                        Reset Password
+                        Reset
                       </button>
                     </div>
                   </form>
                   <p className="text-center">
-                    Tidak punya akses?{" "}
-                    <Button type="link" data-toggle="tab" href="/lupa-password">
-                      Hubungi admin
+                    Punya akun?{" "}
+                    <Button type="link" data-toggle="tab" href="/masuk">
+                      Masuk
                     </Button>
                   </p>
                 </div>

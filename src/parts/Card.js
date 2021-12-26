@@ -4,7 +4,7 @@ export default function Card(props) {
   return (
     <div>
       <div
-        className="card rounded shadow-lg align-item-center"
+        className="card rounded shadow-md align-item-center"
         style={{ width: "342", height: "316" }}
       >
         <img
