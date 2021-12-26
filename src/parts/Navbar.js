@@ -47,13 +47,17 @@ export default function Navbar(props) {
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <input
-                className="form-control mr-sm-2"
-                style={{ background: "#E5E5E5", outlineColor: "#E5E5E5" }}
+                className="form-control mr-sm-2 px-4"
+                style={{
+                  background: "#E5E5E5",
+                  outlineColor: "#E5E5E5",
+                  borderRadius: "15px",
+                }}
                 type="search"
                 placeholder="Cari kursus"
                 aria-label="Search"
               />
-              <Button className="btn rounded-circle" type="submit">
+              <Button className="btn rounded-circle style-search" type="submit">
                 <i className="fas fa-search"></i>
               </Button>
             </form>

@@ -263,3 +263,61 @@ main {
 .shadow-card {
   filter: drop-shadow(0px 4px 20px rgba(0, 0, 0, 0.25));;
 }
+
+// FORM
+.img{
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.wrap{
+	width: 100%;
+	overflow: hidden;
+	background: $white;
+	border-radius: 5px;
+	-webkit-box-shadow: 0px 10px 34px -15px rgba(0,0,0,0.24);
+	-moz-box-shadow: 0px 10px 34px -15px rgba(0,0,0,0.24);
+	box-shadow: 0px 10px 34px -15px rgba(0,0,0,0.24);
+}
+.img,.login-wrap{
+	width: 50%;
+	@include media-breakpoint-down(md){
+		width: 100%;
+	}
+}
+.wrap{
+	.img{
+		@include media-breakpoint-down(sm){
+			height: 250px;
+		}
+	}
+}
+
+.login-wrap{
+	position: relative;
+	background: $white
+	h3{
+		font-weight: 300;
+	}
+}
+
+
+.form-group{
+	position: relative;
+	.label{
+		font-size: 12px;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		color: $black;
+		font-weight: 700;
+	}
+	a{
+		color: $primary;
+	}
+}
+
+.btn-large-login {
+  padding: 1px 155px;
+  box-shadow: 0px 8px 15px rgba(50, 82, 223, 0.3);
+}
