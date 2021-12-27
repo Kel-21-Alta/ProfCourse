@@ -7,6 +7,7 @@ import LupaPasswordPage from "pages/LupaPasswordPage";
 import KursusPage from "pages/KursusPage";
 import SpesialisasiPage from "pages/SpesialisasiPage";
 import TentangKamiPage from "pages/TentangKamiPage";
+import KursusSayaPage from "pages/KursusSayaPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/kursus" component={KursusPage} />
         <Route exact path="/spesialisasi" component={SpesialisasiPage} />
         <Route exact path="/tentang-kami" component={TentangKamiPage} />
+        <Route exact path="/kursus-saya" component={KursusSayaPage} />
       </Switch>
     </Router>
   );

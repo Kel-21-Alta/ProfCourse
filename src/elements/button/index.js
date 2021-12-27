@@ -5,6 +5,7 @@ import propTypes from "prop-types";
 export default function Button(props) {
   const className = [props.className];
   if (props.isPrimary) className.push("btn-primary");
+  if (props.isDanger) className.push("btn-danger");
   if (props.isLarge) className.push("btn-lg");
   if (props.isLarger) className.push("btn-large-login");
   if (props.isCircle) className.push("btn-lg");
@@ -18,7 +19,7 @@ export default function Button(props) {
   };
 
   if (props.isDisabled || props.isLoading) {
-    if (props.isDisabled) className.push("disabled");
+    if (props.isDisabled) className.push("disabled cursor-no-drop");
     return (
       <span className={className.join(" ")} style={props.style}>
         {props.isLoading ? (
@@ -86,6 +87,7 @@ Button.propTypes = {
   isLarger: propTypes.bool,
   isBlock: propTypes.bool,
   isPrimary: propTypes.bool,
+  isDanger: propTypes.bool,
   isCircle: propTypes.bool,
   isExternal: propTypes.bool,
   hasShadow: propTypes.bool,
