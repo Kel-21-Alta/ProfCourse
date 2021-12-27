@@ -1,5 +1,6 @@
 import Button from "elements/button";
 import React from "react";
+import propTypes from "prop-types";
 export default function Card(props) {
   return (
     <div>
@@ -19,13 +20,40 @@ export default function Card(props) {
           <h4 className="card-title font-weight-bold mb-3 text-center">
             Data Science
           </h4>
+          {props.barLoading ? (
+            <div className="progress mb-3">
+              <div
+                className="progress-bar"
+                role="progressbar"
+                style={{ width: `${props.progress}%` }}
+                aria-valuenow={props.progress}
+                aria-valuemin={0}
+                aria-valuemax={100}
+              >
+                {props.progress} %
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
           <div className="text-center">
-            <Button className="btn px-4 py-2" isPrimary>
-              {props.button}
-            </Button>
+            {props.isEnded ? (
+              <Button className="btn px-4 py-2" isDanger isDisabled>
+                {props.button}
+              </Button>
+            ) : (
+              <Button className="btn px-4 py-2" isPrimary>
+                {props.button}
+              </Button>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+Card.prototype = {
+  barLoading: propTypes.bool,
+  isEnded: propTypes.bool,
+};

@@ -97,10 +97,18 @@ export default function Navbar(props) {
                       <br />
                       Halo username
                     </div>
-                    <Button className="dropdown-item" href="#">
+                    <Button
+                      className="nav-link dropdown-item"
+                      type="link"
+                      href="/kursus-saya"
+                    >
                       Kursus Saya
                     </Button>
-                    <Button className="dropdown-item" href="#">
+                    <Button
+                      className="nav-link dropdown-item"
+                      type="link"
+                      href="#"
+                    >
                       Akun Saya
                     </Button>
                     <Button
