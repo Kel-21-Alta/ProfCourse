@@ -18,10 +18,20 @@ export default function KursusSayaPage(props) {
         </div>
         <div className="row">
           <div className="col-md-12 text-right mt-4">
-            <Button className="btn mr-2" isPrimary>
+            <Button
+              className="btn mr-2"
+              type="link"
+              href="/buat-kursus-baru"
+              isPrimary
+            >
               Buat Kursus Baru
             </Button>
-            <Button className="btn " isPrimary>
+            <Button
+              className="btn"
+              type="link"
+              href="/request-kursus-baru"
+              isPrimary
+            >
               Request Kursus Baru
             </Button>
           </div>

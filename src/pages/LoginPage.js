@@ -1,9 +1,34 @@
 import Button from "elements/button";
-import React from "react";
+import React, { useState } from "react";
 import Logo from "assets/images/logo/logo.svg";
 import LoginImage from "assets/images/login/login.svg";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { setLogin } from "services/auth";
+import { useHistory } from "react-router-dom";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  const onSubmit = async () => {
+    const data = {
+      email: email,
+      password: password,
+    };
+    if (!email || !password) {
+      toast.error("Email dan Password Wajib Diisi");
+    } else {
+      const responseAPI = await setLogin(data);
+      if (responseAPI.error) {
+        toast.error(responseAPI.message);
+      } else {
+        toast.success("Login Berhasil");
+        history.push("/");
+      }
+    }
+  };
   return (
     <>
       <section
@@ -51,6 +76,8 @@ export default function LoginPage() {
                         type="text"
                         className="form-control"
                         placeholder="Masukkan email anda"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
                         required
                       />
                     </div>
@@ -62,6 +89,8 @@ export default function LoginPage() {
                         type="password"
                         className="form-control"
                         placeholder="masukkan password anda"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
                         required
                       />
                     </div>
@@ -76,7 +105,13 @@ export default function LoginPage() {
                       </div>
                     </div>
                     <div className="form-group text-center">
-                      <Button className="btn" isLarger isPrimary hasShadow>
+                      <Button
+                        className="btn"
+                        isLarger
+                        isPrimary
+                        hasShadow
+                        onClick={onSubmit}
+                      >
                         Masuk
                       </Button>
                     </div>
@@ -93,6 +128,7 @@ export default function LoginPage() {
           </div>
         </div>
       </section>
+      <ToastContainer />
     </>
   );
 }

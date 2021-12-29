@@ -8,6 +8,8 @@ import KursusPage from "pages/KursusPage";
 import SpesialisasiPage from "pages/SpesialisasiPage";
 import TentangKamiPage from "pages/TentangKamiPage";
 import KursusSayaPage from "pages/KursusSayaPage";
+import RequestKursusBaru from "pages/RequestKursusBaru";
+import BuatKursusBaru from "pages/BuatKursusBaru";
 
 function App() {
   return (
@@ -20,6 +22,12 @@ function App() {
         <Route exact path="/spesialisasi" component={SpesialisasiPage} />
         <Route exact path="/tentang-kami" component={TentangKamiPage} />
         <Route exact path="/kursus-saya" component={KursusSayaPage} />
+        <Route
+          exact
+          path="/request-kursus-baru"
+          component={RequestKursusBaru}
+        />
+        <Route exact path="/buat-kursus-baru" component={BuatKursusBaru} />
       </Switch>
     </Router>
   );
