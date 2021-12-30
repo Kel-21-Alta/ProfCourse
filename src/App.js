@@ -10,6 +10,7 @@ import TentangKamiPage from "pages/TentangKamiPage";
 import KursusSayaPage from "pages/KursusSayaPage";
 import RequestKursusBaru from "pages/RequestKursusBaru";
 import BuatKursusBaru from "pages/BuatKursusBaru";
+import DetailKursus from "pages/DetailKursus";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           component={RequestKursusBaru}
         />
         <Route exact path="/buat-kursus-baru" component={BuatKursusBaru} />
+        <Route exact path="/detail-kursus/:id" component={DetailKursus} />
       </Switch>
     </Router>
   );

@@ -42,7 +42,12 @@ export default function Card(props) {
                 {props.button}
               </Button>
             ) : (
-              <Button className="btn px-4 py-2" isPrimary>
+              <Button
+                className="btn px-4 py-2"
+                type="link"
+                isPrimary
+                href="/detail-kursus/1"
+              >
                 {props.button}
               </Button>
             )}
