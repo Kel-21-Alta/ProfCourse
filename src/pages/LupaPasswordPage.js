@@ -1,12 +1,36 @@
-import React from "react";
+import { React, useState } from "react";
 import Logo from "assets/images/logo/logo.svg";
 import LoginImage from "assets/images/login/forgoy.svg";
 import Button from "elements/button";
-import swal from "sweetalert";
+import { toast, ToastContainer } from "react-toastify";
+import { lupaPassword } from "services/auth";
 
 export default function LupaPasswordPage() {
-  const cobaAlert = () => {
-    swal("Good job!", "You clicked the button!", "success");
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const onSubmit = async () => {
+    const payloadData = {
+      email: email,
+    };
+    if (!email) {
+      setLoading(true);
+      toast.error("Email dan Password Wajib Diisi");
+      setLoading(false);
+    } else {
+      setLoading(true);
+      const responseAPI = await lupaPassword(payloadData);
+
+      if (responseAPI.error) {
+        toast.error(responseAPI.message);
+        setLoading(false);
+      } else {
+        toast.success(
+          "Password baru telah dikirimkan lewat email anda, silahkan cek"
+        );
+        setLoading(false);
+      }
+    }
   };
   return (
     <>
@@ -58,17 +82,20 @@ export default function LupaPasswordPage() {
                         type="text"
                         className="form-control"
                         placeholder="Masukkan email anda"
+                        onChange={(event) => setEmail(event.target.value)}
                         required
                       />
                     </div>
                     <div className="form-group text-center">
-                      <button
-                        className="btn btn-primary"
-                        style={{ padding: "5px 155px" }}
-                        onClick={cobaAlert}
+                      <Button
+                        className="btn btn-block"
+                        isPrimary
+                        hasShadow
+                        onClick={onSubmit}
+                        isLoading={loading ? true : false}
                       >
                         Reset
-                      </button>
+                      </Button>
                     </div>
                   </form>
                   <p className="text-center">
@@ -83,6 +110,7 @@ export default function LupaPasswordPage() {
           </div>
         </div>
       </section>
+      <ToastContainer />
     </>
   );
 }

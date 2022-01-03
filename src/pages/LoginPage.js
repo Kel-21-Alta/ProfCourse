@@ -6,7 +6,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setLogin } from "services/auth";
 import { useHistory } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 import Cookies from "js-cookie";
 
 export default function LoginPage() {

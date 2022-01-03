@@ -12,3 +12,12 @@ export async function setLogin(data) {
     data,
   });
 }
+
+export async function lupaPassword(data) {
+  const url = `${ROOT_API}/${API_VERSION}/forgetpassword`;
+  return callAPI({
+    url,
+    method: "PUT",
+    data,
+  });
+}
