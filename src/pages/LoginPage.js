@@ -6,10 +6,13 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setLogin } from "services/auth";
 import { useHistory } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const onSubmit = async () => {
@@ -18,14 +21,27 @@ export default function LoginPage() {
       password: password,
     };
     if (!email || !password) {
+      setLoading(true);
       toast.error("Email dan Password Wajib Diisi");
+      setLoading(false);
     } else {
+      setLoading(true);
       const responseAPI = await setLogin(data);
       if (responseAPI.error) {
         toast.error(responseAPI.message);
+        setLoading(false);
       } else {
         toast.success("Login Berhasil");
-        history.push("/");
+        const token = responseAPI.data.token;
+
+        const tokenBase64 = btoa(token);
+
+        Cookies.set("token", tokenBase64, { expires: 1 });
+
+        setTimeout(() => {
+          setLoading(false);
+          history.push("/");
+        }, 2500);
       }
     }
   };
@@ -106,11 +122,11 @@ export default function LoginPage() {
                     </div>
                     <div className="form-group text-center">
                       <Button
-                        className="btn"
-                        isLarger
+                        className="btn btn-block"
                         isPrimary
                         hasShadow
                         onClick={onSubmit}
+                        isLoading={loading ? true : false}
                       >
                         Masuk
                       </Button>
