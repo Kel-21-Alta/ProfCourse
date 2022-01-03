@@ -1,11 +1,23 @@
 import React from "react";
 import Button from "elements/button";
 import Logo from "assets/images/logo/logo.svg";
+import Cookies from "js-cookie";
+import { useHistory } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Navbar(props) {
+  const history = useHistory();
   const getNavLinkClass = (path) => {
     return props.location.pathname === path ? "active" : "";
   };
+  const logout = () => {
+    Cookies.remove("token");
+    toast.success("Logout sukses");
+    setTimeout(() => {
+      history.push("/masuk");
+    }, 2500);
+  };
+
   return (
     <header className="spacing-sm">
       <div className="container">
@@ -114,6 +126,7 @@ export default function Navbar(props) {
                     <Button
                       className="dropdown-item btn btn-danger"
                       style={{ backgroundColor: "red", color: "white" }}
+                      onClick={logout}
                     >
                       Keluar
                     </Button>
@@ -124,6 +137,7 @@ export default function Navbar(props) {
           </div>
         </nav>
       </div>
+      <ToastContainer />
     </header>
   );
 }
