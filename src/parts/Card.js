@@ -18,7 +18,7 @@ export default function Card(props) {
         />
         <div className="card-body">
           <h4 className="card-title font-weight-bold mb-3 text-center">
-            Data Science
+            {props.title}
           </h4>
           {props.barLoading ? (
             <div className="progress mb-3">
@@ -46,7 +46,7 @@ export default function Card(props) {
                 className="btn px-4 py-2"
                 type="link"
                 isPrimary
-                href="/detail-kursus/1"
+                href={`/detail-kursus/${props.course_id}`}
               >
                 {props.button}
               </Button>
