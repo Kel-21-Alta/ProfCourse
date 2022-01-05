@@ -17,11 +17,11 @@ export default function HomePage(props) {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const { token } = req.cookies;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const history = useHistory();
-  if (!token) {
-    return history.push("/masuk");
-  }
-}
+// export async function getServerSideProps({ req }) {
+//   const { token } = req.cookies;
+//   // eslint-disable-next-line react-hooks/rules-of-hooks
+//   const history = useHistory();
+//   if (!token) {
+//     return history.push("/masuk");
+//   }
+// }

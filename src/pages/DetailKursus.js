@@ -56,6 +56,17 @@ export default function DetailKursus(props) {
             </div>
           </div>
         </div>
+        <div className="row mt-5">
+          <div className="col-md-6">
+            <h1>Halooo</h1>
+            <div
+              className="container bg-cyan py-3 px-4 rounded"
+              style={{ width: "100%" }}
+            >
+              <h6>Belum ada modul</h6>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="mt-5">
         <Footer></Footer>
