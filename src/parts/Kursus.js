@@ -14,7 +14,6 @@ export default function Kursus(props) {
 
   useEffect(() => {
     getDataCourseList();
-    console.log("dataCourse", dataCourse);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
