@@ -1,5 +1,6 @@
 import Button from "elements/button";
 import Star from "elements/Star";
+import Comments from "parts/Comments";
 import Footer from "parts/Footer";
 import Navbar from "parts/Navbar";
 import React from "react";
@@ -56,18 +57,98 @@ export default function DetailKursus(props) {
             </div>
           </div>
         </div>
+
         <div className="row mt-5">
           <div className="col-md-6">
-            <h1>Halooo</h1>
             <div
-              className="container bg-cyan py-3 px-4 rounded"
-              style={{ width: "100%" }}
+              className="container py-3 px-4 rounded"
+              style={{ width: "100%", backgroundColor: "#DEE2E6" }}
             >
-              <h6>Belum ada modul</h6>
+              <div className="row">
+                <div className="col-auto">
+                  <h3 className="font-weight-bolder">Modul 1</h3>
+                  <ul>
+                    <li>
+                      <Button type="link" href="#">
+                        Modul 1
+                      </Button>
+                    </li>
+                    <li>
+                      <Button type="link" href="#">
+                        Modul 2
+                      </Button>
+                    </li>
+                    <li>
+                      <Button type="link" href="#">
+                        Modul 3
+                      </Button>
+                    </li>
+                    <li>
+                      <Button type="link" href="#">
+                        Modul 4
+                      </Button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className=" " style={{ fontSize: "40px", display: "inline" }}>
+              {" "}
+              <p style={{ fontSize: "20px" }}>
+                {" "}
+                <i className="fas fa-user-friends	px-3"></i> 23 Orang mengambil
+                kursus ini
+              </p>
+            </div>
+            <div>
+              <h5 className="font-weight-bolder">Rank Nilai</h5>
+              <ul>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>
+                <li>
+                  Agus Dwi Milniadi <div className="text-right">100pts</div>
+                </li>{" "}
+              </ul>
             </div>
           </div>
         </div>
+        <div className="row">
+          <div className="col-md-12 mt-4">
+            <Comments></Comments>
+          </div>
+          <div className="col-md-12 mt-4">
+            <Comments></Comments>
+          </div>
+          <div className="col-md-12 mt-4">
+            <Comments></Comments>
+          </div>
+        </div>
       </div>
+
       <div className="mt-5">
         <Footer></Footer>
       </div>
