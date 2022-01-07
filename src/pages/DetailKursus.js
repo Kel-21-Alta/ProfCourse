@@ -1,11 +1,44 @@
+import axios from "axios";
+import publicApi from "config/api/publicApi";
 import Button from "elements/button";
 import Star from "elements/Star";
 import Comments from "parts/Comments";
 import Footer from "parts/Footer";
 import Navbar from "parts/Navbar";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { setComments, setCoursesDetail } from "redux/actions/coursesAction";
 
 export default function DetailKursus(props) {
+  const detailData = useSelector((state) => state.dataDetailCourses.data.data);
+  const dataComments = useSelector((state) => state.dataCommentsId.data.data);
+
+  const idCourses = useParams().id;
+  const dispatch = useDispatch();
+  const urlApi = publicApi();
+
+  const fetchData = async () => {
+    const response = await axios
+      .get(`${urlApi}/api/v1/courses/${idCourses}`)
+      .catch((err) => {
+        console.log(err);
+      });
+    const responseComments = await axios
+      .get(`${urlApi}/api/v1/courses/${idCourses}/feedback`)
+      .catch((err) => {
+        console.log(err);
+      });
+
+    dispatch(setCoursesDetail(response.data));
+    dispatch(setComments(responseComments.data));
+  };
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // console.log(detailData);
   return (
     <>
       <Navbar {...props}></Navbar>
@@ -13,17 +46,9 @@ export default function DetailKursus(props) {
         <div className="row ">
           <div className="col-md-6 mt-5">
             <div className="text-left ">
-              <h2 className="font-weight-bolder ">Buat Kursus Baru</h2>
+              <h2 className="font-weight-bolder ">{detailData?.name_course}</h2>
               <p className="font-weight-light mt-3">
-                Ilmu data (bahasa Inggris: data science) adalah suatu disiplin
-                ilmu yang khusus mempelajari data, khususnya data kuantitatif
-                (data numerik), baik yang terstruktur maupun tidak
-                terstruktur.[1][2] Berbagai subjek yang dibahas dalam ilmu data
-                meliputi semua proses data, mulai dari pengumpulan data,
-                analisis data, pengolahan data, manajemen data, kearsipan,
-                pengelompokan data, penyajian data, distribusi data, hingga cara
-                mengubah data menjadi kesatuan informasi yang dapat dipahami
-                semua orang.
+                {detailData?.description}
               </p>
             </div>
           </div>
@@ -50,9 +75,29 @@ export default function DetailKursus(props) {
               <div className="col-md-6"></div>
 
               <div className="col-md-12 text-center mt-2">
-                <Button className="btn btn-block" isPrimary>
-                  Daftar Kursus
-                </Button>
+                {detailData?.info_user.isRegister ? (
+                  <>
+                    <div className="progress mb-3">
+                      <div
+                        className="progress-bar"
+                        role="progressbar"
+                        style={{ width: `${detailData?.info_user.progress}%` }}
+                        aria-valuenow={detailData?.info_user.progress}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                      >
+                        {detailData?.info_user.progress} %
+                      </div>
+                    </div>
+                    <Button className="btn btn-block btn-success">
+                      Lanjutkan Belajar
+                    </Button>
+                  </>
+                ) : (
+                  <Button className="btn btn-block" isPrimary>
+                    Daftar Kursus
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -68,26 +113,15 @@ export default function DetailKursus(props) {
                 <div className="col-auto">
                   <h3 className="font-weight-bolder">Modul 1</h3>
                   <ul>
-                    <li>
-                      <Button type="link" href="#">
-                        Modul 1
-                      </Button>
-                    </li>
-                    <li>
-                      <Button type="link" href="#">
-                        Modul 2
-                      </Button>
-                    </li>
-                    <li>
-                      <Button type="link" href="#">
-                        Modul 3
-                      </Button>
-                    </li>
-                    <li>
-                      <Button type="link" href="#">
-                        Modul 4
-                      </Button>
-                    </li>
+                    {detailData?.moduls?.map((item) => {
+                      return (
+                        <li>
+                          <Button type="link" href="#">
+                            {item.name_modul}
+                          </Button>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>
@@ -98,54 +132,39 @@ export default function DetailKursus(props) {
               {" "}
               <p style={{ fontSize: "20px" }}>
                 {" "}
-                <i className="fas fa-user-friends	px-3"></i> 23 Orang mengambil
-                kursus ini
+                <i className="fas fa-user-friends	px-3"></i>{" "}
+                {detailData?.user_taken_course} Orang mengambil kursus ini
               </p>
             </div>
             <div>
               <h5 className="font-weight-bolder">Rank Nilai</h5>
               <ul>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>
-                <li>
-                  Agus Dwi Milniadi <div className="text-right">100pts</div>
-                </li>{" "}
+                {detailData?.rangking?.map((item) => {
+                  return (
+                    <li>
+                      {item.name_user}{" "}
+                      <div className="text-right">{item.skor}pts</div>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
         </div>
         <div className="row">
-          <div className="col-md-12 mt-4">
-            <Comments></Comments>
-          </div>
-          <div className="col-md-12 mt-4">
-            <Comments></Comments>
-          </div>
-          <div className="col-md-12 mt-4">
-            <Comments></Comments>
-          </div>
+          {dataComments?.review?.map((item) => {
+            return (
+              <div className="col-md-12 mt-4">
+                <Comments
+                  key={item.name_user}
+                  name_user={item.name_user}
+                  rating={item.rating}
+                  url={item.url}
+                  body={item.body}
+                ></Comments>
+              </div>
+            );
+          })}
         </div>
       </div>
 

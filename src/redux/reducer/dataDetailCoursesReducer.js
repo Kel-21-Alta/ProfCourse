@@ -6,11 +6,23 @@ const initialState = {
 
 export const dataCoursesDetailUserReducer = (
   state = initialState,
-  { type, data }
+  { type, payload }
 ) => {
   switch (type) {
     case ActionTypes.SET_DETAIL_COURSES_USER:
-      return { ...state, payload: data };
+      return { ...state, data: payload };
+    default:
+      return state;
+  }
+};
+
+export const dataCommentsReducer = (
+  state = initialState,
+  { type, payload }
+) => {
+  switch (type) {
+    case ActionTypes.SET_COMMENTS:
+      return { ...state, data: payload };
     default:
       return state;
   }
