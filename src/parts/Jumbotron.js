@@ -3,8 +3,22 @@ import BannerFoto from "assets/images/beranda/banner.svg";
 import Icon1 from "assets/images/beranda/icon_kursus.svg";
 import Icon2 from "assets/images/beranda/icon_anggota.svg";
 import Icon3 from "assets/images/beranda/icon_spesialisasi.svg";
+import { useCallback, useEffect, useState } from "react";
+import { getSummaryServices } from "services/Beranda";
 
 const Jumbotron = () => {
+  const [summary, setSummary] = useState([]);
+
+  const getDataSummary = useCallback(async () => {
+    const data = await getSummaryServices();
+    setSummary(data);
+  }, [getSummaryServices]);
+
+  useEffect(() => {
+    getDataSummary();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log("Summary ");
   return (
     <section className="container pt-1">
       <div className="row align-item-center">
@@ -35,7 +49,7 @@ const Jumbotron = () => {
               </div>
 
               <h6 className="mt-3">
-                1400{" "}
+                {summary.count_course}{" "}
                 <span className="text-gray-500 font-weight light"> kursus</span>
               </h6>
             </div>
@@ -52,7 +66,7 @@ const Jumbotron = () => {
               </div>
 
               <h6 className="mt-3">
-                12313{" "}
+                {summary.count_user}{" "}
                 <span className="text-gray-500 font-weight light">
                   {" "}
                   anggota
@@ -72,7 +86,7 @@ const Jumbotron = () => {
               </div>
 
               <h6 className="mt-3">
-                12{" "}
+                {summary.count_spesialization}{" "}
                 <span className="text-gray-500 font-weight light">
                   {" "}
                   spesialisasi

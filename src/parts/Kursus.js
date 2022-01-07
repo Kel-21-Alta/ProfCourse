@@ -14,7 +14,6 @@ export default function Kursus(props) {
 
   useEffect(() => {
     getDataCourseList();
-    console.log("dataCourse", dataCourse);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -29,10 +28,10 @@ export default function Kursus(props) {
               <div className="col-md-4 mb-4">
                 <Card
                   button="Detail Kursus"
-                  key={item.course_id}
-                  course_id={item.course_id}
-                  title={item.title}
-                  url_image={item.url_image}
+                  key={item?.course_id}
+                  course_id={item?.course_id}
+                  title={item?.title}
+                  url_image={item?.url_image}
                 ></Card>
               </div>
             );
