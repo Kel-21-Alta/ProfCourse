@@ -6,7 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setLogin } from "services/auth";
 import { useHistory } from "react-router-dom";
-import Cookies from "js-cookie";
+import { login } from "utils";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -32,13 +32,10 @@ export default function LoginPage() {
       } else {
         toast.success("Login Berhasil");
         const token = responseAPI.data.token;
-
         const tokenBase64 = btoa(token);
-
-        Cookies.set("token", tokenBase64, { expires: 1 });
-
         setTimeout(() => {
           setLoading(false);
+          login(tokenBase64);
           history.push("/");
         }, 2500);
       }

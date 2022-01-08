@@ -1,6 +1,6 @@
 import React from "react";
 import "assets/scss/style.scss";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import HomePage from "pages/HomePage";
 import LoginPage from "pages/LoginPage";
 import LupaPasswordPage from "pages/LupaPasswordPage";
@@ -11,25 +11,45 @@ import KursusSayaPage from "pages/KursusSayaPage";
 import RequestKursusBaru from "pages/RequestKursusBaru";
 import BuatKursusBaru from "pages/BuatKursusBaru";
 import DetailKursus from "pages/DetailKursus";
+import PrivateRoute from "route/PrivateRoute";
+import PublicRoute from "route/PublicRoute";
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/masuk" component={LoginPage} />
-        <Route exact path="/lupa-password" component={LupaPasswordPage} />
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/kursus" component={KursusPage} />
-        <Route exact path="/spesialisasi" component={SpesialisasiPage} />
-        <Route exact path="/tentang-kami" component={TentangKamiPage} />
-        <Route exact path="/kursus-saya" component={KursusSayaPage} />
-        <Route
+        <PublicRoute
+          restricted={true}
+          exact
+          path="/masuk"
+          component={LoginPage}
+        />
+        <PublicRoute
+          restricted={true}
+          exact
+          path="/lupa-password"
+          component={LupaPasswordPage}
+        />
+        <PrivateRoute exact path="/" component={HomePage} />
+        <PrivateRoute exact path="/kursus" component={KursusPage} />
+        <PrivateRoute exact path="/spesialisasi" component={SpesialisasiPage} />
+        <PrivateRoute exact path="/tentang-kami" component={TentangKamiPage} />
+        <PrivateRoute exact path="/kursus-saya" component={KursusSayaPage} />
+        <PrivateRoute
           exact
           path="/request-kursus-baru"
           component={RequestKursusBaru}
         />
-        <Route exact path="/buat-kursus-baru" component={BuatKursusBaru} />
-        <Route exact path="/detail-kursus/:id" component={DetailKursus} />
+        <PrivateRoute
+          exact
+          path="/buat-kursus-baru"
+          component={BuatKursusBaru}
+        />
+        <PrivateRoute
+          exact
+          path="/detail-kursus/:id"
+          component={DetailKursus}
+        />
       </Switch>
     </Router>
   );
