@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-proptypes */
 import axios from "axios";
 import publicApi from "config/api/publicApi";
 import Button from "elements/button";

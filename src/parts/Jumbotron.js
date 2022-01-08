@@ -12,6 +12,7 @@ const Jumbotron = () => {
   const getDataSummary = useCallback(async () => {
     const data = await getSummaryServices();
     setSummary(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getSummaryServices]);
 
   useEffect(() => {

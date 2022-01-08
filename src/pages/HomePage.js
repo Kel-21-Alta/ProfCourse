@@ -3,7 +3,6 @@ import Jumbotron from "parts/Jumbotron";
 import Kursus from "parts/Kursus";
 import Spesialisasi from "parts/Spesialisasi";
 import Footer from "parts/Footer";
-import { useHistory } from "react-router-dom";
 
 export default function HomePage(props) {
   return (
