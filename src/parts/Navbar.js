@@ -19,7 +19,7 @@ export default function Navbar(props) {
   };
 
   return (
-    <header className="spacing-sm">
+    <header className={props.isLearn ? "mb-0" : "spacing-sm"}>
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <img src={Logo} alt="" srcset="" />

@@ -13,6 +13,7 @@ import BuatKursusBaru from "pages/BuatKursusBaru";
 import DetailKursus from "pages/DetailKursus";
 import PrivateRoute from "route/PrivateRoute";
 import PublicRoute from "route/PublicRoute";
+import LMSHome from "pages/LMSHome";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           path="/detail-kursus/:id"
           component={DetailKursus}
         />
+        <PrivateRoute exact path="/learn" component={LMSHome} />
       </Switch>
     </Router>
   );

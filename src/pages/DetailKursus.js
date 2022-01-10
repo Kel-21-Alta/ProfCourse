@@ -10,6 +10,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Cookies from "js-cookie";
 import { setComments, setCoursesDetail } from "redux/actions/coursesAction";
 
 export default function DetailKursus(props) {
@@ -19,15 +20,22 @@ export default function DetailKursus(props) {
   const idCourses = useParams().id;
   const dispatch = useDispatch();
   const urlApi = publicApi();
+  const token = Cookies.get("token");
+  const tokenAtob = atob(token);
+  let config = {
+    headers: {
+      Authorization: `Bearer ${tokenAtob}`,
+    },
+  };
 
   const fetchData = async () => {
     const response = await axios
-      .get(`${urlApi}/api/v1/courses/${idCourses}`)
+      .get(`${urlApi}/api/v1/courses/${idCourses}`, config)
       .catch((err) => {
         console.log(err);
       });
     const responseComments = await axios
-      .get(`${urlApi}/api/v1/courses/${idCourses}/feedback`)
+      .get(`${urlApi}/api/v1/courses/${idCourses}/feedback`, config)
       .catch((err) => {
         console.log(err);
       });
