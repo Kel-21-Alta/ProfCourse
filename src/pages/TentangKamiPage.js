@@ -1,12 +1,10 @@
 import Footer from "parts/Footer";
-import Navbar from "parts/Navbar";
 import React from "react";
 import AboutImage from "assets/images/tentang-kami/about.svg";
 import Button from "elements/button";
 export default function TentangKamiPage(props) {
   return (
     <>
-      <Navbar {...props}></Navbar>
       <div className="container">
         <h2 className="text-center font-weight-bolder">Tentang Kami</h2>
         <div className="row mt-5">

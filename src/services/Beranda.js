@@ -12,7 +12,14 @@ export async function getDataCourse() {
       Authorization: `Bearer ${jwtToken}`,
     },
   };
-  const response = await axios.get(`${ROOT_API}/api/v1/courses  `, config);
+  const response = await axios
+    .get(`${ROOT_API}/api/v1/courses  `, config)
+    .catch((err) => {
+      if (err.toJSON().status === 403) {
+        Cookies.remove("token");
+      }
+    });
+
   const axiosResponse = response.data.data;
   return axiosResponse;
 }

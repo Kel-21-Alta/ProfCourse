@@ -1,6 +1,7 @@
 import React from "react";
+import "sbadmin.css";
 import "assets/scss/style.scss";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "pages/HomePage";
 import LoginPage from "pages/LoginPage";
 import LupaPasswordPage from "pages/LupaPasswordPage";
@@ -14,47 +15,62 @@ import DetailKursus from "pages/DetailKursus";
 import PrivateRoute from "route/PrivateRoute";
 import PublicRoute from "route/PublicRoute";
 import LMSHome from "pages/LMSHome";
+import Navbar from "parts/Navbar";
+import LMSMateri from "pages/LMSMateri";
+import LMSVideo from "pages/LMSVideo";
+import LMSKuis from "pages/LMSKuis";
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <PublicRoute
-          restricted={true}
-          exact
-          path="/masuk"
-          component={LoginPage}
-        />
-        <PublicRoute
-          restricted={true}
-          exact
-          path="/lupa-password"
-          component={LupaPasswordPage}
-        />
-        <PrivateRoute exact path="/" component={HomePage} />
-        <PrivateRoute exact path="/kursus" component={KursusPage} />
-        <PrivateRoute exact path="/spesialisasi" component={SpesialisasiPage} />
-        <PrivateRoute exact path="/tentang-kami" component={TentangKamiPage} />
-        <PrivateRoute exact path="/kursus-saya" component={KursusSayaPage} />
-        <PrivateRoute
-          exact
-          path="/request-kursus-baru"
-          component={RequestKursusBaru}
-        />
-        <PrivateRoute
-          exact
-          path="/buat-kursus-baru"
-          component={BuatKursusBaru}
-        />
-        <PrivateRoute
-          exact
-          path="/detail-kursus/:id"
-          component={DetailKursus}
-        />
-        <PrivateRoute exact path="/learn" component={LMSHome} />
-      </Switch>
-    </Router>
+  const DefaultContainer = (props) => (
+    <>
+      <Navbar {...props} />
+      <PrivateRoute exact path="/" component={HomePage} />
+      <PrivateRoute exact path="/kursus" component={KursusPage} />
+      <PrivateRoute exact path="/spesialisasi" component={SpesialisasiPage} />
+      <PrivateRoute exact path="/tentang-kami" component={TentangKamiPage} />
+      <PrivateRoute exact path="/kursus-saya" component={KursusSayaPage} />
+      <PrivateRoute
+        exact
+        path="/request-kursus-baru"
+        component={RequestKursusBaru}
+      />
+      <PrivateRoute exact path="/buat-kursus-baru" component={BuatKursusBaru} />
+      <PrivateRoute exact path="/detail-kursus/:id" component={DetailKursus} />
+      <PrivateRoute exact path="/belajar" component={LMSHome} />
+      <PrivateRoute exact path="/belajar/materi/:id" component={LMSMateri} />
+      <PrivateRoute exact path="/belajar/video/:id" component={LMSVideo} />
+      <PrivateRoute exact path="/belajar/kuis/:id" component={LMSKuis} />
+    </>
   );
+  return (
+    <>
+      <Router>
+        <Switch>
+          <PublicRoute
+            restricted={true}
+            exact
+            path="/masuk"
+            component={LoginPage}
+          />
+          <PublicRoute
+            restricted={true}
+            exact
+            path="/lupa-password"
+            component={LupaPasswordPage}
+          />
+          <Route component={DefaultContainer}></Route>
+        </Switch>
+      </Router>
+    </>
+  );
+  // return (
+  //   <Router>
+  //     <Switch>
+
+  //     </Switch>
+  //   </Router>
+
+  // )
 }
 
 export default App;

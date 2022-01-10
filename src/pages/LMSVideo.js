@@ -1,40 +1,37 @@
 import Button from "elements/button";
 import Sidebar from "parts/Sidebar";
 import React from "react";
+import ReactPlayer from "react-player";
 
-export default function LMSMateri() {
+export default function LMSVideo() {
   return (
     <>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}
-      <div className="mt-0 wrapper-sidebar " id="wrapper">
+      <div className="" id="wrapper">
         <Sidebar />
         <div id="content-wrapper" className="d-flex flex-column h-screen">
           <div id="content">
             <div className="container my-5">
-              <div className="mb-3">
-                <div className="row mb-5">
-                  <div className="col-md-6 text-right">
-                    <span className="fs-5 font-weight-bolder mr-5">
-                      Materi 1
-                    </span>
-                  </div>
-                  <div className="col-md-6">
-                    <Button className="btn btn-primary">Materi 1</Button>
-                  </div>
+              <>
+                <div className="container player-wrapper">
+                  <ReactPlayer
+                    url="https://firebasestorage.googleapis.com/v0/b/investa-image-upload.appspot.com/o/images%2FSDa.mp4?alt=media&token=c64b1948-d623-42a9-9473-d36b70bc5cba"
+                    className="react-player"
+                    playing
+                    controls
+                    width="70%"
+                    height="70%"
+                    config={{
+                      file: { attributes: { controlsList: "nodownload" } },
+                    }}
+                    // Disable right click
+                    onContextMenu={(e) => e.preventDefault()}
+                  />
                 </div>
-                <div className="row mb-5">
-                  <div className="col-md-6 text-right">
-                    <span className="fs-5 font-weight-bolder mr-5">
-                      Materi 2
-                    </span>
-                  </div>
-                  <div className="col-md-6">
-                    <Button className="btn btn-primary">Materi 2 </Button>
-                  </div>
-                </div>
-              </div>
+              </>
             </div>
           </div>
+
           <div>
             <div className="container my-5">
               <div className="row">

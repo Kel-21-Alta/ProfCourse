@@ -5,7 +5,6 @@ import Button from "elements/button";
 import Star from "elements/Star";
 import Comments from "parts/Comments";
 import Footer from "parts/Footer";
-import Navbar from "parts/Navbar";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -43,14 +42,16 @@ export default function DetailKursus(props) {
     dispatch(setCoursesDetail(response.data));
     dispatch(setComments(responseComments.data));
   };
+
   useEffect(() => {
     fetchData();
+    window.scroll(0, 0);
+    document.title = "Profcourse | Detail Kursus";
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // console.log(detailData);
   return (
     <>
-      <Navbar {...props}></Navbar>
       <div className="container">
         <div className="row ">
           <div className="col-md-6 mt-5">
@@ -84,7 +85,7 @@ export default function DetailKursus(props) {
               <div className="col-md-6"></div>
 
               <div className="col-md-12 text-center mt-2">
-                {detailData?.info_user.isRegister ? (
+                {!detailData?.info_user.isRegister ? (
                   <>
                     <div className="progress mb-3">
                       <div
@@ -98,7 +99,11 @@ export default function DetailKursus(props) {
                         {detailData?.info_user.progress} %
                       </div>
                     </div>
-                    <Button className="btn btn-block btn-success">
+                    <Button
+                      className="btn btn-block btn-success"
+                      type="link"
+                      href="/belajar"
+                    >
                       Lanjutkan Belajar
                     </Button>
                   </>

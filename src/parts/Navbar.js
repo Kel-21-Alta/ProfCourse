@@ -2,7 +2,7 @@ import React from "react";
 import Button from "elements/button";
 import Logo from "assets/images/logo/logo.svg";
 import Cookies from "js-cookie";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 export default function Navbar(props) {
@@ -17,9 +17,18 @@ export default function Navbar(props) {
       history.push("/masuk");
     }, 2500);
   };
-
+  let params = useLocation();
   return (
-    <header className={props.isLearn ? "mb-0" : "spacing-sm"}>
+    <header
+      className={
+        params.pathname === "/belajar" ||
+        params.pathname === "/belajar/materi/:id" ||
+        params.pathname === "/belajar/video/:id" ||
+        params.pathname === "/belajar/kuis/:id"
+          ? "mb-0"
+          : "spacing-sm"
+      }
+    >
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <img src={Logo} alt="" srcset="" />
