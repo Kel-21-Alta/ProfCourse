@@ -1,7 +1,6 @@
 // import Button from "elements/button";
 import Button from "elements/button";
 import Footer from "parts/Footer";
-import Navbar from "parts/Navbar";
 // import { useState } from "react";
 
 export default function BuatKursusBaru(props) {
@@ -9,7 +8,6 @@ export default function BuatKursusBaru(props) {
   //   let [modal1, setModal1] = useState("");
   return (
     <>
-      <Navbar {...props}></Navbar>
       <div className="container">
         <div className="text-center ">
           <h2 className="font-weight-bolder">Buat Kursus Baru</h2>

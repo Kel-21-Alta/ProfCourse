@@ -1,13 +1,16 @@
-import Navbar from "parts/Navbar";
 import Jumbotron from "parts/Jumbotron";
 import Kursus from "parts/Kursus";
 import Spesialisasi from "parts/Spesialisasi";
 import Footer from "parts/Footer";
+import { useEffect } from "react";
 
 export default function HomePage(props) {
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Beranda";
+  });
   return (
     <>
-      <Navbar {...props}></Navbar>
       <Jumbotron></Jumbotron>
       <Kursus></Kursus>
       <Spesialisasi></Spesialisasi>

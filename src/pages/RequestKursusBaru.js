@@ -1,12 +1,10 @@
 import Button from "elements/button";
 import Footer from "parts/Footer";
-import Navbar from "parts/Navbar";
 import React from "react";
 
 export default function RequestKursusBaru(props) {
   return (
     <>
-      <Navbar {...props}></Navbar>
       <div className="container">
         <div className="text-center ">
           <h2 className="font-weight-bolder">Request Kursus Baru</h2>
