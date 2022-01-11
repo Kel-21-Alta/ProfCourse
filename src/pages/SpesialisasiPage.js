@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import Button from "elements/button";
 import Card from "parts/Card";
 import Footer from "parts/Footer";
-import Navbar from "parts/Navbar";
 import { getDataSpesialisasi } from "services/Beranda";
 export default function SpesialisasiPage(props) {
   const [dataSpesialisasi, setDataSpesialisasi] = useState([]);
@@ -20,7 +19,6 @@ export default function SpesialisasiPage(props) {
 
   return (
     <>
-      <Navbar {...props}></Navbar>
       <div className="container">
         <h2 className="text-center font-weight-bolder">
           Spesialisasi Tersedia

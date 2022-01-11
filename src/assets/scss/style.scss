@@ -364,3 +364,27 @@ main {
 .cursor-no-drop {
   cursor: no-drop;
 }
+.text-primary-blue-tua {
+  color: #152C5B
+}
+.h-screen {
+  height: 100vh;
+  overflow: scroll;
+}
+.fs-5 {
+  font-size: 30px;
+}
+.wrapper-sidebar {
+  display: flex;
+}
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%; /* 720 / 1280 = 0.5625 */
+  padding-bottom: 0;
+}
+
+.react-player {
+  position: absolute;
+  top: 0%;
+  left: 15%;
+}

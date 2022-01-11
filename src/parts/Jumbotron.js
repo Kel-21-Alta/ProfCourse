@@ -19,7 +19,6 @@ const Jumbotron = () => {
     getDataSummary();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log("Summary ");
   return (
     <section className="container pt-1">
       <div className="row align-item-center">

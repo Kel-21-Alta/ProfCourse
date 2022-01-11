@@ -1,14 +1,12 @@
 import Button from "elements/button";
 import Card from "parts/Card";
 import Footer from "parts/Footer";
-import Navbar from "parts/Navbar";
 import React from "react";
 
 export default function KursusSayaPage(props) {
   let progressBelajar = 60;
   return (
     <>
-      <Navbar {...props}></Navbar>
       <div className="container">
         <div className="text-center font-weight-bold">
           <h2>
