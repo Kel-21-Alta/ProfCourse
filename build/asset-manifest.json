@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ce1f8652.css",
+    "main.js": "/static/js/main.df2e12c4.js",
+    "static/js/787.3e17c1c8.chunk.js": "/static/js/787.3e17c1c8.chunk.js",
+    "static/media/about.svg": "/static/media/about.f9047bda8a08206f38c8ac53bb274bd6.svg",
+    "static/media/banner.svg": "/static/media/banner.9456cd51320bceeeac82dafe421051ec.svg",
+    "static/media/login.svg": "/static/media/login.d63200092bdf84a990992d41358b8dea.svg",
+    "static/media/forgoy.svg": "/static/media/forgoy.8630b6f3f30aa99d2756b51136a6ca1b.svg",
+    "static/media/logo.svg": "/static/media/logo.ab9f39e2cdc0b5b00ce3a204f8ffeabd.svg",
+    "index.html": "/index.html",
+    "static/media/icon_spesialisasi.svg": "/static/media/icon_spesialisasi.7a12d7a6594922b939618b16fafc4c4c.svg",
+    "static/media/icon_anggota.svg": "/static/media/icon_anggota.5cac615fe810c3dc38ac6b063eb1426b.svg",
+    "static/media/star.svg": "/static/media/star.9f0d919b2c63fde53882.svg",
+    "static/media/icon_kursus.svg": "/static/media/icon_kursus.bdcac14dbc0e412a2d6910c62f19c7ab.svg",
+    "main.ce1f8652.css.map": "/static/css/main.ce1f8652.css.map",
+    "main.df2e12c4.js.map": "/static/js/main.df2e12c4.js.map",
+    "787.3e17c1c8.chunk.js.map": "/static/js/787.3e17c1c8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ce1f8652.css",
+    "static/js/main.df2e12c4.js"
+  ]
+}

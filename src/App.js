@@ -19,6 +19,8 @@ import Navbar from "parts/Navbar";
 import LMSMateri from "pages/LMSMateri";
 import LMSVideo from "pages/LMSVideo";
 import LMSKuis from "pages/LMSKuis";
+import AkunSaya from "pages/AkunSaya";
+import UbahPassword from "pages/UbahPassword";
 
 function App() {
   const DefaultContainer = (props) => (
@@ -36,10 +38,16 @@ function App() {
       />
       <PrivateRoute exact path="/buat-kursus-baru" component={BuatKursusBaru} />
       <PrivateRoute exact path="/detail-kursus/:id" component={DetailKursus} />
-      <PrivateRoute exact path="/belajar" component={LMSHome} />
+      <PrivateRoute exact path="/belajar/:id" component={LMSHome} />
       <PrivateRoute exact path="/belajar/materi/:id" component={LMSMateri} />
       <PrivateRoute exact path="/belajar/video/:id" component={LMSVideo} />
       <PrivateRoute exact path="/belajar/kuis/:id" component={LMSKuis} />
+      <PrivateRoute exact path="/akun-saya" component={AkunSaya} />
+      <PrivateRoute
+        exact
+        path="/akun-saya/ubah-password"
+        component={UbahPassword}
+      />
     </>
   );
   return (

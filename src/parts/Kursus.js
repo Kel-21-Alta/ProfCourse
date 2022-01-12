@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import Card from "./Card";
 import Button from "elements/button";
 import { getDataCourse } from "services/Beranda";
-import Cookies from "js-cookie";
 
 export default function Kursus(props) {
   const [dataCourse, setDataCourse] = useState([]);
