@@ -2,11 +2,11 @@ name: 'CI CD'
 on:
   push:
     branches:
-      - development
       - 'deploy-docker'
   pull_request:
     branches:
       - development
+      - main
 
 jobs:
   build: 
@@ -64,4 +64,4 @@ jobs:
             StrictHostKeyChecking=no
           END
       - name: Connect EC2 & Remove All Container & Pull from Registry & Start
-        run: ssh development 'docker rm -f wahyunf354/profcourse-client:dev && docker pull wahyunf354/prof_course:dev && docker run -d -p 8080:80 --name=prof_course_client wahyunf354/profcourse-client:dev'
+        run: ssh development 'docker rm -f prof_course_client && docker pull wahyunf354/prof_course:dev && docker run -d -p 8080:80 --name=prof_course_client wahyunf354/profcourse-client:dev'
