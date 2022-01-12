@@ -1,11 +1,16 @@
 // import Button from "elements/button";
 import Button from "elements/button";
 import Footer from "parts/Footer";
+import { useEffect } from "react";
 // import { useState } from "react";
 
 export default function BuatKursusBaru(props) {
   let selesai = true;
   //   let [modal1, setModal1] = useState("");
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Buat Kursus Baru";
+  });
   return (
     <>
       <div className="container">

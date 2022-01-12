@@ -15,6 +15,9 @@ export default function SpesialisasiPage(props) {
   useEffect(() => {
     getSpesialisasiList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    window.scroll(0, 0);
+    document.title = "Profcourse | Spesialisasi";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

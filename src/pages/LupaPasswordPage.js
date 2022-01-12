@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Logo from "assets/images/logo/logo.svg";
 import LoginImage from "assets/images/login/forgoy.svg";
 import Button from "elements/button";
@@ -32,6 +32,10 @@ export default function LupaPasswordPage() {
       }
     }
   };
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Lupa Password";
+  });
   return (
     <>
       <section

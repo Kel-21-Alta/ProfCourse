@@ -1,10 +1,14 @@
 import Button from "elements/button";
 import Card from "parts/Card";
 import Footer from "parts/Footer";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function KursusSayaPage(props) {
   let progressBelajar = 60;
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Kursus Saya";
+  });
   return (
     <>
       <div className="container">

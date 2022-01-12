@@ -128,7 +128,7 @@ export default function Navbar(props) {
                     <Button
                       className="nav-link dropdown-item"
                       type="link"
-                      href="#"
+                      href="/akun-saya"
                     >
                       Akun Saya
                     </Button>

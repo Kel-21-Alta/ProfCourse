@@ -1,5 +1,5 @@
 import Button from "elements/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "assets/images/logo/logo.svg";
 import LoginImage from "assets/images/login/login.svg";
 import { toast, ToastContainer } from "react-toastify";
@@ -41,6 +41,10 @@ export default function LoginPage() {
       }
     }
   };
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Masuk";
+  });
   return (
     <>
       <section

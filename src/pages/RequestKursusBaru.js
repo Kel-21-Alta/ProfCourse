@@ -1,8 +1,12 @@
 import Button from "elements/button";
 import Footer from "parts/Footer";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function RequestKursusBaru(props) {
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Request Kursus";
+  });
   return (
     <>
       <div className="container">
