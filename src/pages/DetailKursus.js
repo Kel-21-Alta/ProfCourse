@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { setComments, setCoursesDetail } from "redux/actions/coursesAction";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function DetailKursus(props) {
   const detailData = useSelector((state) => state.dataDetailCourses.data.data);
@@ -27,6 +28,11 @@ export default function DetailKursus(props) {
     },
   };
 
+  let configRegister = {
+    headers: {
+      Authorization: `Bearer ${tokenAtob}`,
+    },
+  };
   const fetchData = async () => {
     const response = await axios
       .get(`${urlApi}/api/v1/courses/${idCourses}`, config)
@@ -42,11 +48,27 @@ export default function DetailKursus(props) {
     dispatch(setCoursesDetail(response.data));
     dispatch(setComments(responseComments.data));
   };
+  const dataJson = {
+    course_id: idCourses,
+  };
+  const enrollCourses = async () => {
+    const response = await axios
+      .post(`${urlApi}/api/v1/course/register`, dataJson, config)
+      .catch((err) => {
+        toast.error('"Gagal mendaftarkan Courses"');
+      });
+    toast.success(response.data.data.Message);
+    setTimeout(() => {
+      // eslint-disable-next-line no-restricted-globals
+      location.reload();
+    }, 2000);
+  };
 
   useEffect(() => {
     fetchData();
     window.scroll(0, 0);
     document.title = "Profcourse | Detail Kursus";
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // console.log(detailData);
@@ -85,7 +107,7 @@ export default function DetailKursus(props) {
               <div className="col-md-6"></div>
 
               <div className="col-md-12 text-center mt-2">
-                {!detailData?.info_user.isRegister ? (
+                {detailData?.info_user.is_register ? (
                   <>
                     <div className="progress mb-3">
                       <div
@@ -102,13 +124,17 @@ export default function DetailKursus(props) {
                     <Button
                       className="btn btn-block btn-success"
                       type="link"
-                      href="/belajar"
+                      href={`/belajar/${detailData?.course_id}`}
                     >
                       Lanjutkan Belajar
                     </Button>
                   </>
                 ) : (
-                  <Button className="btn btn-block" isPrimary>
+                  <Button
+                    className="btn btn-block"
+                    isPrimary
+                    onClick={enrollCourses}
+                  >
                     Daftar Kursus
                   </Button>
                 )}
@@ -185,6 +211,7 @@ export default function DetailKursus(props) {
       <div className="mt-5">
         <Footer></Footer>
       </div>
+      <ToastContainer />
     </>
   );
 }

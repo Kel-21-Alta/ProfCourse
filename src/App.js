@@ -36,7 +36,7 @@ function App() {
       />
       <PrivateRoute exact path="/buat-kursus-baru" component={BuatKursusBaru} />
       <PrivateRoute exact path="/detail-kursus/:id" component={DetailKursus} />
-      <PrivateRoute exact path="/belajar" component={LMSHome} />
+      <PrivateRoute exact path="/belajar/:id" component={LMSHome} />
       <PrivateRoute exact path="/belajar/materi/:id" component={LMSMateri} />
       <PrivateRoute exact path="/belajar/video/:id" component={LMSVideo} />
       <PrivateRoute exact path="/belajar/kuis/:id" component={LMSKuis} />

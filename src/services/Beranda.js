@@ -17,6 +17,8 @@ export async function getDataCourse() {
     .catch((err) => {
       if (err.toJSON().status === 403) {
         Cookies.remove("token");
+        // eslint-disable-next-line no-restricted-globals
+        location.reload();
       }
     });
 
