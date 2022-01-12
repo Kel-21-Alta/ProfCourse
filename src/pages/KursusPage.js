@@ -16,6 +16,9 @@ export default function KursusPage(props) {
   useEffect(() => {
     getDataCourseList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    window.scroll(0, 0);
+    document.title = "Profcourse | Kursus";
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

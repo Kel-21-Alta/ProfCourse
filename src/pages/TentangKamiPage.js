@@ -1,8 +1,12 @@
 import Footer from "parts/Footer";
-import React from "react";
+import React, { useEffect } from "react";
 import AboutImage from "assets/images/tentang-kami/about.svg";
 import Button from "elements/button";
 export default function TentangKamiPage(props) {
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Tentang Kami";
+  });
   return (
     <>
       <div className="container">

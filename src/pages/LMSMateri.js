@@ -1,8 +1,12 @@
 import Button from "elements/button";
 import Sidebar from "parts/Sidebar";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function LMSMateri() {
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Belajar";
+  });
   return (
     <>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}

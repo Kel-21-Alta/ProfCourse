@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "elements/button";
-import LMSMateri from "./LMSMateri";
 import Sidebar from "parts/Sidebar";
 import LMSStarter from "./LMSStarter";
 import { useRouteMatch } from "react-router-dom";
 
 export default function LMSHome(props) {
-  let { path, url } = useRouteMatch();
+  let { url } = useRouteMatch();
+  useEffect(() => {
+    window.scroll(0, 0);
+    document.title = "Profcourse | Belajar";
+  });
   return (
     <>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}
