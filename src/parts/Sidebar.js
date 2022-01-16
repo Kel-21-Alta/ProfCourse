@@ -1,11 +1,9 @@
 import Button from "elements/button";
 import React from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
 export default function Sidebar() {
   const detailData = useSelector((state) => state.dataDetailCourses.data.data);
-  const idCourses = useParams().id;
 
   return (
     <>

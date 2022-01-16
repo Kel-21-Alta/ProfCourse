@@ -28,11 +28,6 @@ export default function DetailKursus(props) {
     },
   };
 
-  let configRegister = {
-    headers: {
-      Authorization: `Bearer ${tokenAtob}`,
-    },
-  };
   const fetchData = async () => {
     const response = await axios
       .get(`${urlApi}/api/v1/courses/${idCourses}`, config)
