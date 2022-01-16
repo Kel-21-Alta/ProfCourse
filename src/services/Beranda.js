@@ -15,7 +15,7 @@ export async function getDataCourse() {
   const response = await axios
     .get(`${ROOT_API}/api/v1/courses  `, config)
     .catch((err) => {
-      if (err.toJSON().status === 403) {
+      if (err.toJSON().status > 400) {
         Cookies.remove("token");
         // eslint-disable-next-line no-restricted-globals
         location.reload();
