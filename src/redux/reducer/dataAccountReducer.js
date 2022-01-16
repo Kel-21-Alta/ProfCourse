@@ -4,10 +4,10 @@ const initialState = {
   data: [],
 };
 
-export const dataAccountReducer = (state = initialState, { type, data }) => {
+export const dataAccountReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ActionTypes.SET_ACCOUNT_DATA:
-      return { ...state, payload: data };
+      return { ...state, data: payload };
     default:
       return state;
   }

@@ -21,6 +21,7 @@ import LMSVideo from "pages/LMSVideo";
 import LMSKuis from "pages/LMSKuis";
 import AkunSaya from "pages/AkunSaya";
 import UbahPassword from "pages/UbahPassword";
+import UbahData from "pages/UbahData";
 
 function App() {
   const DefaultContainer = (props) => (
@@ -43,6 +44,7 @@ function App() {
       <PrivateRoute exact path="/belajar/video/:id" component={LMSVideo} />
       <PrivateRoute exact path="/belajar/kuis/:id" component={LMSKuis} />
       <PrivateRoute exact path="/akun-saya" component={AkunSaya} />
+      <PrivateRoute exact path="/akun-saya/ubah-data" component={UbahData} />
       <PrivateRoute
         exact
         path="/akun-saya/ubah-password"
