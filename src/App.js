@@ -22,6 +22,7 @@ import LMSKuis from "pages/LMSKuis";
 import AkunSaya from "pages/AkunSaya";
 import UbahPassword from "pages/UbahPassword";
 import UbahData from "pages/UbahData";
+import DetailSpesialisasi from "pages/DetailSpesialisasi";
 
 function App() {
   const DefaultContainer = (props) => (
@@ -39,6 +40,12 @@ function App() {
       />
       <PrivateRoute exact path="/buat-kursus-baru" component={BuatKursusBaru} />
       <PrivateRoute exact path="/detail-kursus/:id" component={DetailKursus} />
+      <PrivateRoute
+        exact
+        path="/detail-spesialisasi/:id"
+        component={DetailSpesialisasi}
+      />
+
       <PrivateRoute exact path="/belajar/:id" component={LMSHome} />
       <PrivateRoute exact path="/belajar/materi/:id" component={LMSMateri} />
       <PrivateRoute exact path="/belajar/video/:id" component={LMSVideo} />
