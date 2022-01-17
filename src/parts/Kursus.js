@@ -2,13 +2,31 @@ import React, { useCallback, useEffect, useState } from "react";
 import Card from "./Card";
 import Button from "elements/button";
 import { getDataCourse } from "services/Beranda";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import publicApi from "config/api/publicApi";
+import getToken from "config/api/getToken";
+import Cookies from "js-cookie";
+import { useLocation } from "react-router-dom";
+import { accountData } from "redux/actions/accountActions";
 
 export default function Kursus(props) {
   const [dataCourse, setDataCourse] = useState([]);
+  const dispatch = useDispatch("");
+  const urlApi = publicApi();
+  const config = getToken();
+  const location = useLocation();
 
   const getDataCourseList = useCallback(async () => {
     const data = await getDataCourse();
     setDataCourse(data);
+    const response = await axios
+      .get(`${urlApi}/api/v1/currentuser`, config)
+      .catch((err) => {
+        Cookies.remove("token");
+        location.reload();
+      });
+    dispatch(accountData(response.data.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getDataCourse]);
 

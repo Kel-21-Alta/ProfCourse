@@ -23,12 +23,14 @@ import AkunSaya from "pages/AkunSaya";
 import UbahPassword from "pages/UbahPassword";
 import UbahData from "pages/UbahData";
 import DetailSpesialisasi from "pages/DetailSpesialisasi";
+import SearchPage from "pages/SearchPage";
 
 function App() {
   const DefaultContainer = (props) => (
     <>
       <Navbar {...props} />
       <PrivateRoute exact path="/" component={HomePage} />
+      <PrivateRoute exact path="/cari/:judul" component={SearchPage} />
       <PrivateRoute exact path="/kursus" component={KursusPage} />
       <PrivateRoute exact path="/spesialisasi" component={SpesialisasiPage} />
       <PrivateRoute exact path="/tentang-kami" component={TentangKamiPage} />

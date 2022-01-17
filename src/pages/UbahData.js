@@ -64,10 +64,18 @@ export default function UbahData() {
   const onChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setData({
-      ...data,
-      [name]: value,
-    });
+    if (name === "tanggalLahir") {
+      // VALUE CONVERT TIMESTAMP
+      // setData({
+      //   ....data,
+      //   [name] : valueBaru
+      // })
+    } else {
+      setData({
+        ...data,
+        [name]: value,
+      });
+    }
   };
   const token = getToken();
   const publicApis = publicApi();
@@ -215,6 +223,7 @@ export default function UbahData() {
                   className="form-control"
                   onChange={onChange}
                   value={data.tanggalLahir === "" ? "" : `${data.tanggalLahir}`}
+                  // {console.log}
                   // value={"2000-05-05"}
                 />
               </div>
