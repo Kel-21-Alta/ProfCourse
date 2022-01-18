@@ -1,13 +1,34 @@
+import axios from "axios";
+import getToken from "config/api/getToken";
+import publicApi from "config/api/publicApi";
 import Button from "elements/button";
 import Sidebar from "parts/Sidebar";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
+import { useParams } from "react-router-dom";
 
 export default function LMSVideo() {
+  const [dataMateri, setDataMateri] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const urlApi = publicApi();
+  const params = useParams().id;
+  const config = getToken();
+  const fetchData = async () => {
+    setLoading(true);
+    const response = await axios
+      .get(`${urlApi}/api/v1/materi/${params}`, config)
+      .catch((err) => {
+        console.log(err);
+      });
+    setDataMateri(response?.data?.data);
+  };
   useEffect(() => {
     window.scroll(0, 0);
     document.title = "Profcourse | Belajar";
-  });
+    fetchData();
+    setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   return (
     <>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}
@@ -16,23 +37,27 @@ export default function LMSVideo() {
         <div id="content-wrapper" className="d-flex flex-column h-screen">
           <div id="content">
             <div className="container my-5">
-              <>
-                <div className="container player-wrapper">
-                  <ReactPlayer
-                    url="https://firebasestorage.googleapis.com/v0/b/investa-image-upload.appspot.com/o/images%2FSDa.mp4?alt=media&token=c64b1948-d623-42a9-9473-d36b70bc5cba"
-                    className="react-player"
-                    playing
-                    controls
-                    width="70%"
-                    height="70%"
-                    config={{
-                      file: { attributes: { controlsList: "nodownload" } },
-                    }}
-                    // Disable right click
-                    onContextMenu={(e) => e.preventDefault()}
-                  />
-                </div>
-              </>
+              {loading ? (
+                "Loading"
+              ) : (
+                <>
+                  <div className="container player-wrapper">
+                    <ReactPlayer
+                      url={dataMateri?.url_materi}
+                      className="react-player"
+                      playing
+                      controls
+                      width="70%"
+                      height="70%"
+                      config={{
+                        file: { attributes: { controlsList: "nodownload" } },
+                      }}
+                      // Disable right click
+                      onContextMenu={(e) => e.preventDefault()}
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
 

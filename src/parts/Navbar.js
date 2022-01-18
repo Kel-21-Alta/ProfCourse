@@ -26,6 +26,7 @@ export default function Navbar(props) {
   };
 
   let params = useLocation();
+
   return (
     <header
       className={

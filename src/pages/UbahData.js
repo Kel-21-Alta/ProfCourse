@@ -19,6 +19,7 @@ export default function UbahData() {
   const [url, setUrl] = useState("");
   const [i_image, setImage] = useState("");
   const history = useHistory();
+  let birthDate = dataUser.birth.slice(0, 10);
 
   //   HANDLE UPLOAD
 
@@ -55,28 +56,21 @@ export default function UbahData() {
     email: dataUser?.email,
     nomorHp: dataUser?.no_hp,
     tempat: dataUser?.birth_place,
-    tanggalLahir: dataUser?.birth,
+    tanggalLahir: birthDate,
     bio: dataUser?.bio,
-    urlRedux: dataUser?.profile,
+    urlRedux: dataUser?.url_image,
   });
 
   // END USE STATE FORM
   const onChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    if (name === "tanggalLahir") {
-      // VALUE CONVERT TIMESTAMP
-      // setData({
-      //   ....data,
-      //   [name] : valueBaru
-      // })
-    } else {
-      setData({
-        ...data,
-        [name]: value,
-      });
-    }
+    setData({
+      ...data,
+      [name]: value,
+    });
   };
+  console.log("Data user ", data);
   const token = getToken();
   const publicApis = publicApi();
   const dataSend = {
@@ -104,7 +98,6 @@ export default function UbahData() {
   };
   // END HANDLE UPLOAD
   useEffect(() => {
-    // enrollCourses();
     window.scroll(0, 0);
     document.title = "Profcourse | Akun Saya";
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -222,9 +215,9 @@ export default function UbahData() {
                   name="tanggalLahir"
                   className="form-control"
                   onChange={onChange}
-                  value={data.tanggalLahir === "" ? "" : `${data.tanggalLahir}`}
-                  // {console.log}
-                  // value={"2000-05-05"}
+                  value={
+                    data?.tanggalLahir === "" ? "" : `${data?.tanggalLahir}`
+                  }
                 />
               </div>
             </div>

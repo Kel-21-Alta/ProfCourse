@@ -7,6 +7,8 @@ export default function AkunSaya() {
   // const [dataUser, setDataUser] = useState({});
   // const [loading, setLoading] = useState(false);
   const dataUser = useSelector((state) => state.dataAccount.data);
+  let birthDate = dataUser?.birth?.slice(0, 10);
+  let birthDateNew = birthDate?.split("-").reverse().join("-");
 
   useEffect(() => {
     window.scroll(0, 0);
@@ -98,7 +100,7 @@ export default function AkunSaya() {
               value={
                 dataUser?.birth_place === "" || dataUser?.birth === ""
                   ? "Belum disetel"
-                  : `${dataUser?.birth_place}, ${dataUser?.birth}`
+                  : `${dataUser?.birth_place}, ${birthDateNew}`
               }
               disabled
             />
