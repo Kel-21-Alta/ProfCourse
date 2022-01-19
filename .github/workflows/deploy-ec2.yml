@@ -2,14 +2,14 @@ name: 'CI CD'
 on:
   push:
     branches:
-      - 'deploy-docker'
-  pull_request:
-    branches:
-      - development
-      - main
+      - 'development'
+  # pull_request:
+  #   branches:
+  #     - development
+  #     - main
 
 jobs:
-  build: 
+  build:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Set up Node.js ${{matrix.node-version}}
         uses: actions/setup-node@v1
         with:
@@ -33,14 +33,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build docker
-        run: docker build -t wahyunf354/profcourse-client:dev .
+        run: docker build -t agusdwimilniadi/profcourse/1.0.0 .
       - name: login registry docker hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
       - name: push docker hub
-        run: docker push wahyunf354/profcourse-client:dev
+        run: docker push agusdwimilniadi/profcourse/1.0.0
   deployment-ec2:
     name: "Deploy to ec2 from registry docker hub"
     runs-on: ubuntu-20.04
@@ -64,4 +64,4 @@ jobs:
             StrictHostKeyChecking=no
           END
       - name: Connect EC2 & Remove All Container & Pull from Registry & Start
-        run: ssh development 'docker rm -f prof_course_client && docker pull wahyunf354/prof_course:dev && docker run -d -p 8080:80 --name=prof_course_client wahyunf354/profcourse-client:dev'
+        run: ssh development 'docker rm -f prof_course_client && docker pull agusdwimilniadi/profcourse/1.0.0 && docker run -d -p 3000:3000 --name=prof_course_client agusdwimilniadi/profcourse/1.0.0'
