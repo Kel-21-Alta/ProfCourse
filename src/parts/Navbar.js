@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "elements/button";
 import Logo from "assets/images/logo/logo.svg";
 import Cookies from "js-cookie";
 import { useHistory, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export default function Navbar(props) {
+  const dataUser = useSelector((state) => state.dataAccount.data);
   const history = useHistory();
+  const [cari, setCari] = useState("");
+
+  let name = dataUser;
+  let firstWord = name?.name?.split(" ")[0];
+  let urlImage = name?.url_image;
   const getNavLinkClass = (path) => {
     return props.location.pathname === path ? "active" : "";
   };
@@ -17,7 +24,9 @@ export default function Navbar(props) {
       history.push("/masuk");
     }, 2500);
   };
+
   let params = useLocation();
+
   return (
     <header
       className={
@@ -75,10 +84,17 @@ export default function Navbar(props) {
                   borderRadius: "15px",
                 }}
                 type="search"
+                onChange={(e) => {
+                  setCari(e.target.value);
+                }}
                 placeholder="Cari kursus"
                 aria-label="Search"
               />
-              <Button className="btn rounded-circle style-search" type="submit">
+              <Button
+                className="btn rounded-circle style-search"
+                type="link"
+                href={`/cari/${cari}`}
+              >
                 <i className="fas fa-search"></i>
               </Button>
             </form>
@@ -100,7 +116,7 @@ export default function Navbar(props) {
                     aria-labelledby="dropdownMenuButton"
                   >
                     <div
-                      className="dropdown-item"
+                      className="dropdown-item font-weight-bold"
                       style={{ cursor: "context-menu" }}
                       href="#"
                     >
@@ -110,13 +126,14 @@ export default function Navbar(props) {
                             className="rounded-circle"
                             height={80}
                             width={80}
-                            src="https://picsum.photos/200/300"
+                            src={urlImage}
                             alt=""
                           />
                         </div>
                       </div>
                       <br />
-                      Halo username
+                      Halo {firstWord}
+                      <br />
                     </div>
                     <Button
                       className="nav-link dropdown-item"

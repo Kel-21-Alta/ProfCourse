@@ -12,6 +12,7 @@ import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { setComments, setCoursesDetail } from "redux/actions/coursesAction";
 import { toast, ToastContainer } from "react-toastify";
+import { removeSelectedSpesialisasi } from "redux/actions/spesialisasiAction";
 
 export default function DetailKursus(props) {
   const detailData = useSelector((state) => state.dataDetailCourses.data.data);
@@ -63,9 +64,11 @@ export default function DetailKursus(props) {
     fetchData();
     window.scroll(0, 0);
     document.title = "Profcourse | Detail Kursus";
-
+    return () => {
+      dispatch(removeSelectedSpesialisasi());
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [idCourses]);
   // console.log(detailData);
   return (
     <>

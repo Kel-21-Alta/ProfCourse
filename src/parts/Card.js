@@ -46,7 +46,7 @@ export default function Card(props) {
                 className="btn px-4 py-2"
                 type="link"
                 isPrimary
-                href={`/detail-kursus/${props.course_id}`}
+                href={`/${props.urlTarget}/${props.course_id}`}
               >
                 {props.button}
               </Button>
