@@ -33,7 +33,10 @@ export async function getDataSpesialisasi() {
       Authorization: `Bearer ${jwtToken}`,
     },
   };
-  const response = await axios.get(`${ROOT_API}/api/v1/courses`, config);
+  const response = await axios.get(
+    `${ROOT_API}/api/v1/spesializations?limit=3`,
+    config
+  );
   const axiosResponse = response.data.data;
   return axiosResponse;
 }

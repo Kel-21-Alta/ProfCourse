@@ -41,6 +41,7 @@ export default function SpesialisasiPage(props) {
                     course_id={item.course_id}
                     title={item.title}
                     url_image={item.url_image}
+                    urlTarget="detail-kursus"
                   ></Card>
                 </div>
               );
