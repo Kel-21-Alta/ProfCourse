@@ -1,15 +1,35 @@
+import axios from "axios";
+import getToken from "config/api/getToken";
+import publicApi from "config/api/publicApi";
 import Button from "elements/button";
 import Sidebar from "parts/Sidebar";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function LMSKuis() {
+  const [dataKuis, setDataKuis] = useState([]);
+  const urlApi = publicApi();
+  const config = getToken();
+  const params = useParams().id;
+
   useEffect(() => {
     window.scroll(0, 0);
     document.title = "Profcourse | Belajar";
-  });
+    const fetchData = async () => {
+      const response = await axios
+        .get(`${urlApi}/api/v1/quizs/modul/${params}`, config)
+        .catch((err) => {
+          console.log(err);
+        });
+      setDataKuis(response.data.data);
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
   return (
     <>
       <>
+        {console.log("Data kuiss", dataKuis)}
         {/* eslint-disable jsx-a11y/anchor-is-valid */}
         <div className="mt-0 wrapper-sidebar " id="wrapper">
           <Sidebar />
@@ -18,298 +38,40 @@ export default function LMSKuis() {
               <div className="container my-5">
                 <form className="form-group">
                   <ol>
-                    <li>
-                      <div className="">
-                        Riris memiliki manik-manik yang disimpan dalam 24
-                        kaleng. Setiap kaleng berisi 132 butirmanik-manik.
-                        Karena kalengnya rusak, Riris ingin memindahkan semua
-                        manik-maniknya kedalam 8 kaleng yang baru. Banyak butir
-                        manik-manik yang ada di setiap kaleng yang baruadalah ….
-                      </div>
-                      <div>
-                        <div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios1"
-                              defaultValue="option1"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios1"
-                            >
-                              A. Lorem
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios2"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios2"
-                            >
-                              B. Ipsum
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios3"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios3"
-                            >
-                              C. Still
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios4"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios4"
-                            >
-                              D. Ipsum
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="">
-                        Riris memiliki manik-manik yang disimpan dalam 24
-                        kaleng. Setiap kaleng berisi 132 butirmanik-manik.
-                        Karena kalengnya rusak, Riris ingin memindahkan semua
-                        manik-maniknya kedalam 8 kaleng yang baru. Banyak butir
-                        manik-manik yang ada di setiap kaleng yang baruadalah ….
-                      </div>
-                      <div>
-                        <div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios1"
-                              defaultValue="option1"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios1"
-                            >
-                              A. Lorem
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios2"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios2"
-                            >
-                              B. Ipsum
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios3"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios3"
-                            >
-                              C. Still
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios4"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios4"
-                            >
-                              D. Ipsum
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="">
-                        Riris memiliki manik-manik yang disimpan dalam 24
-                        kaleng. Setiap kaleng berisi 132 butirmanik-manik.
-                        Karena kalengnya rusak, Riris ingin memindahkan semua
-                        manik-maniknya kedalam 8 kaleng yang baru. Banyak butir
-                        manik-manik yang ada di setiap kaleng yang baruadalah ….
-                      </div>
-                      <div>
-                        <div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios1"
-                              defaultValue="option1"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios1"
-                            >
-                              A. Lorem
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios2"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios2"
-                            >
-                              B. Ipsum
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios3"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios3"
-                            >
-                              C. Still
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios4"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios4"
-                            >
-                              D. Ipsum
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <div className="">
-                        Riris memiliki manik-manik yang disimpan dalam 24
-                        kaleng. Setiap kaleng berisi 132 butirmanik-manik.
-                        Karena kalengnya rusak, Riris ingin memindahkan semua
-                        manik-maniknya kedalam 8 kaleng yang baru. Banyak butir
-                        manik-manik yang ada di setiap kaleng yang baruadalah ….
-                      </div>
-                      <div>
-                        <div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios1"
-                              defaultValue="option1"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios1"
-                            >
-                              A. Lorem
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios2"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios2"
-                            >
-                              B. Ipsum
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios3"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios3"
-                            >
-                              C. Still
-                            </label>
-                          </div>
-                          <div className="form-check">
-                            <input
-                              className="form-check-input"
-                              type="radio"
-                              name="exampleRadios"
-                              id="exampleRadios4"
-                              defaultValue="option2"
-                            />
-                            <label
-                              className="form-check-label"
-                              htmlFor="exampleRadios4"
-                            >
-                              D. Ipsum
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                    {dataKuis?.map((item) => {
+                      return (
+                        <>
+                          <li>
+                            <div className="">{item?.pertanyaan}</div>
+                            <div>
+                              <div>
+                                {item?.pilihan?.map((answ, index) => {
+                                  return (
+                                    <>
+                                      <div className="form-check">
+                                        <input
+                                          className="form-check-input"
+                                          type="radio"
+                                          name={`${item?.pertanyaan}`}
+                                          id={`exampleRadios_xs${item?.pertanyaan}${answ}`}
+                                          value={answ}
+                                        />
+                                        <label
+                                          className="form-check-label"
+                                          htmlFor={`exampleRadios_xs${item?.pertanyaan}${answ}`}
+                                        >
+                                          {answ}
+                                        </label>
+                                      </div>
+                                    </>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          </li>
+                        </>
+                      );
+                    })}
                   </ol>
                   <div className="text-center">
                     <button className="btn btn-primary " type="submit">

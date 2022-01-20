@@ -26,16 +26,12 @@ export default function Navbar(props) {
   };
 
   let params = useLocation();
+  console.log(params.pathname.slice(0, 8));
 
   return (
     <header
       className={
-        params.pathname === "/belajar" ||
-        params.pathname === "/belajar/materi/:id" ||
-        params.pathname === "/belajar/video/:id" ||
-        params.pathname === "/belajar/kuis/:id"
-          ? "mb-0"
-          : "spacing-sm"
+        params.pathname.slice(0, 8) === "/belajar" ? "mb-0" : "spacing-sm"
       }
     >
       <div className="container">

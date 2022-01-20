@@ -2,6 +2,7 @@ import axios from "axios";
 import getToken from "config/api/getToken";
 import publicApi from "config/api/publicApi";
 import Button from "elements/button";
+import LoadingElements from "parts/LoadingElements";
 import Sidebar from "parts/Sidebar";
 import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
@@ -9,24 +10,25 @@ import { useParams } from "react-router-dom";
 
 export default function LMSVideo() {
   const [dataMateri, setDataMateri] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const urlApi = publicApi();
   const params = useParams().id;
   const config = getToken();
-  const fetchData = async () => {
-    setLoading(true);
-    const response = await axios
-      .get(`${urlApi}/api/v1/materi/${params}`, config)
-      .catch((err) => {
-        console.log(err);
-      });
-    setDataMateri(response?.data?.data);
-  };
+
   useEffect(() => {
     window.scroll(0, 0);
     document.title = "Profcourse | Belajar";
+    const fetchData = async () => {
+      setLoading(true);
+      const response = await axios
+        .get(`${urlApi}/api/v1/materi/${params}`, config)
+        .catch((err) => {
+          console.log(err);
+        });
+      setDataMateri(response?.data?.data);
+      setLoading(false);
+    };
     fetchData();
-    setLoading(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
   return (
@@ -38,7 +40,11 @@ export default function LMSVideo() {
           <div id="content">
             <div className="container my-5">
               {loading ? (
-                "Loading"
+                <>
+                  <div className="text-center">
+                    <LoadingElements />
+                  </div>
+                </>
               ) : (
                 <>
                   <div className="container player-wrapper">

@@ -6,20 +6,26 @@ import React, { useEffect, useState } from "react";
 
 export default function ListSidebar(props) {
   const [dataMateri, setDataMateri] = useState([]);
+  // const [dataKuis, setDataKuis] = useState([]);
   const urlApi = publicApi();
   const idModul = props.modul_id;
   const config = getToken();
-  const fetchData = async () => {
-    const response = await axios
-      .get(`${urlApi}/api/v1/moduls/${idModul}`, config)
-      .catch((err) => {
-        console.log(err);
-      });
-    setDataMateri(response.data.data);
-  };
+  const dataKuis = [];
+
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios
+        .get(`${urlApi}/api/v1/moduls/${idModul}`, config)
+        .catch((err) => {
+          console.log(err);
+        });
+      setDataMateri(response.data.data);
+    };
+
     fetchData();
-  });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idModul]);
   return (
     <>
       <li className="nav-item">
@@ -45,52 +51,54 @@ export default function ListSidebar(props) {
           <div className="bg-white py-2 collapse-inner rounded">
             <h6 className="collapse-header">Materi:</h6>
             {dataMateri?.materi?.map((item) => {
+              // const fetchDataKuis = async () => {
+              //   const responseData = await axios
+              //     .get(`${urlApi}/api/v1/quizs/modul/${idModul}`, config)
+              //     .catch((err) => {
+              //       console.log(err);
+              //     });
+              //   setDataKuis(responseData?.data?.data);
+              // };
+              // fetchDataKuis();
               return (
-                <Button
-                  type="link"
-                  className="collapse-item"
-                  href={`/belajar/${item?.type === 1 ? "materi" : "video"}/${
-                    item?.id
-                  }`}
-                >
-                  <div>
-                    {item?.type === 1 ? (
-                      <>
-                        <div className="font-weight-bolder">Materi :</div>
-                        <br />
-                      </>
-                    ) : (
-                      <>
-                        <div className="font-weight-bolder">Video :</div> <br />
-                      </>
-                    )}
-                    {item?.title}
-                  </div>
-                </Button>
+                <>
+                  <Button
+                    type="link"
+                    className="collapse-item"
+                    href={`/belajar/${item?.type === 1 ? "materi" : "video"}/${
+                      item?.id
+                    }`}
+                  >
+                    <div>
+                      {item?.type === 1 ? (
+                        <>
+                          <div className="font-weight-bolder">Materi :</div>
+                          <br />
+                        </>
+                      ) : (
+                        <>
+                          <div className="font-weight-bolder">Video :</div>{" "}
+                          <br />
+                        </>
+                      )}
+                      {item?.title}
+                    </div>
+                  </Button>
+                </>
               );
             })}
-
-            {/* <Button
-              type="link"
-              className="collapse-item"
-              href="/belajar/materi/1"
-            >
-              Materi 2
-            </Button>
-            <Button
-              type="link"
-              className="collapse-item"
-              href="/belajar/video/1"
-            >
-              Video Pembelajaran
-            </Button>
-            <Button
-              type="link"
-              className="collapse-item"
-              href="/belajar/kuis/1"
-            >
-              Kuis
-            </Button> */}
+            {/* {console.log("dasdadas ", dataMateri)} */}
+            {dataKuis !== null ? (
+              <Button
+                type="link"
+                className="collapse-item"
+                href={`/belajar/kuis/${idModul}`}
+              >
+                <div className="font-weight-bolder">Kuis</div>
+              </Button>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </li>
