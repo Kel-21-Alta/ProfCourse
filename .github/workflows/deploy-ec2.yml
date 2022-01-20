@@ -40,7 +40,7 @@ jobs:
   deployment-ec2:
     name: "Deploy to ec2 from registry docker hub"
     runs-on: ubuntu-20.04
-    needs: build-push-docker
+    needs: build
     steps:
       - uses: actions/checkout@v2
       - name: configuration SSH
