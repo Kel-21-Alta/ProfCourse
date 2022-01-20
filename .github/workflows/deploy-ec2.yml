@@ -28,12 +28,6 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-  build-push-docker:
-    name: "Build image and push register"
-    runs-on: ubuntu-20.04
-    needs: build
-    steps:
-      - uses: actions/checkout@v2
       - name: build docker
         run: docker build -t agusdwimilniadi/profcourse .
       - name: login registry docker hub
