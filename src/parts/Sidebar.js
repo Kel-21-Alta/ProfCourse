@@ -4,6 +4,7 @@ import ListSidebar from "./ListSidebar";
 
 export default function Sidebar() {
   const detailData = useSelector((state) => state.dataDetailCourses.data.data);
+
   return (
     <>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}
@@ -23,15 +24,17 @@ export default function Sidebar() {
                 <div className="d-inline-block ">Progress</div>
               </div>
               <div className="col-md-6">
-                <div className="text-right">25%</div>
+                <div className="text-right">
+                  {detailData?.info_user?.progress}%
+                </div>
               </div>
             </div>
             <div className="progress">
               <div
                 className="progress-bar"
                 role="progressbar"
-                style={{ width: "25%" }}
-                aria-valuenow={25}
+                style={{ width: `${detailData?.info_user?.progress}%` }}
+                aria-valuenow={detailData?.info_user?.progress}
                 aria-valuemin={0}
                 aria-valuemax={100}
               ></div>

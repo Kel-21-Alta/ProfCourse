@@ -67,17 +67,18 @@ export default function Navbar(props) {
               </li>
               <li className={`nav-item ${getNavLinkClass("/tentang-kami")}`}>
                 <Button className="nav-link" type="link" href="/tentang-kami">
-                  Tentang Kami
+                  Tentang
                 </Button>
               </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <input
-                className="form-control mr-sm-2 px-3"
+                className="form-control mr-sm-2 px-3 "
                 style={{
                   background: "#E5E5E5",
                   outlineColor: "#E5E5E5",
                   borderRadius: "15px",
+                  width: "70%",
                 }}
                 type="search"
                 onChange={(e) => {

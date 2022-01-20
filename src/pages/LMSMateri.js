@@ -21,9 +21,7 @@ export default function LMSMateri() {
       setLoading(true);
       const response = await axios
         .get(`${urlApi}/api/v1/materi/${params}`, config)
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
       setDataMateri(response?.data?.data);
       setLoading(false);
     };
@@ -40,7 +38,12 @@ export default function LMSMateri() {
             <div className="container my-5">
               {loading ? (
                 <>
-                  <LoadingElements></LoadingElements>
+                  <div
+                    className="container m-auto"
+                    style={{ paddingLeft: "40%", paddingTop: "10%" }}
+                  >
+                    <LoadingElements />
+                  </div>
                 </>
               ) : (
                 <div className="mb-3">
