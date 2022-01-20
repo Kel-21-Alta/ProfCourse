@@ -28,6 +28,7 @@ export default function LMSMateri() {
       setLoading(false);
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
   return (
     <>
