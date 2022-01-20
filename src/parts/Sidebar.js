@@ -34,6 +34,7 @@ export default function Sidebar() {
                 className="progress-bar"
                 role="progressbar"
                 style={{ width: `${detailData?.info_user?.progress}%` }}
+                // eslint-disable-next-line jsx-a11y/aria-proptypes
                 aria-valuenow={detailData?.info_user?.progress}
                 aria-valuemin={0}
                 aria-valuemax={100}
