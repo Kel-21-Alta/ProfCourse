@@ -86,7 +86,7 @@ const Jumbotron = () => {
               </div>
 
               <h6 className="mt-3">
-                {summary.count_spesialization}{" "}
+                {summary.count_spesiazation}{" "}
                 <span className="text-gray-500 font-weight light">
                   {" "}
                   spesialisasi

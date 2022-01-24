@@ -1,3 +1,4 @@
+import Button from "elements/button";
 import React from "react";
 import { useSelector } from "react-redux";
 import ListSidebar from "./ListSidebar";
@@ -59,6 +60,41 @@ export default function Sidebar() {
                 />
               );
             })}
+          <li className="nav-item">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a
+              className="nav-link collapsed"
+              href="#"
+              type="link"
+              data-toggle="collapse"
+              data-target={`#modulReview`}
+              aria-expanded="true"
+              aria-controls={`modulReview`}
+            >
+              <i className="fas fa-fw fa-book" />
+              <span>Review</span>
+            </a>
+            <div
+              id={`modulReview`}
+              className="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordionSidebar"
+            >
+              <div className="bg-white py-2 collapse-inner rounded">
+                <h6 className="collapse-header">Review:</h6>
+
+                <>
+                  <Button
+                    type="link"
+                    className="collapse-item"
+                    href={`/belajar/review/${detailData?.course_id}`}
+                  >
+                    <div>Review</div>
+                  </Button>
+                </>
+              </div>
+            </div>
+          </li>
         </>
       </ul>
     </>
