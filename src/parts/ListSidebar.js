@@ -23,7 +23,6 @@ export default function ListSidebar(props) {
     };
 
     fetchData();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idModul]);
   return (
@@ -50,7 +49,7 @@ export default function ListSidebar(props) {
         >
           <div className="bg-white py-2 collapse-inner rounded">
             <h6 className="collapse-header">Materi:</h6>
-            {dataMateri?.materi?.map((item) => {
+            {dataMateri?.materi?.map((item, index) => {
               return (
                 <>
                   <Button
@@ -63,16 +62,26 @@ export default function ListSidebar(props) {
                     <div>
                       {item?.type === 1 ? (
                         <>
-                          <div className="font-weight-bolder">Materi :</div>
+                          <div className="font-weight-bolder">
+                            Materi : {item?.is_complate ? "✅" : ""}
+                          </div>
                           <br />
                         </>
                       ) : (
                         <>
-                          <div className="font-weight-bolder">Video :</div>{" "}
+                          <div className="font-weight-bolder">
+                            Video : {item?.is_complate ? "✅" : ""}
+                          </div>{" "}
                           <br />
                         </>
                       )}
-                      {item?.title}
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div style={{ wordBreak: "break-word" }}>
+                            {index + 1}. {item?.title}{" "}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </Button>
                 </>

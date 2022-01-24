@@ -25,6 +25,7 @@ import UbahData from "pages/UbahData";
 import DetailSpesialisasi from "pages/DetailSpesialisasi";
 import SearchPage from "pages/SearchPage";
 import LMSScore from "pages/LMSScore";
+import LMSReview from "pages/LMSReview";
 
 function App() {
   const DefaultContainer = (props) => (
@@ -54,6 +55,8 @@ function App() {
       <PrivateRoute exact path="/belajar/video/:id" component={LMSVideo} />
       <PrivateRoute exact path="/belajar/kuis/:id" component={LMSKuis} />
       <PrivateRoute exact path="/belajar/kuis/nilai/:id" component={LMSScore} />
+      <PrivateRoute exact path="/belajar/review/:id" component={LMSReview} />
+
       <PrivateRoute exact path="/akun-saya" component={AkunSaya} />
       <PrivateRoute exact path="/akun-saya/ubah-data" component={UbahData} />
       <PrivateRoute

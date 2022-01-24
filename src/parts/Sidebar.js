@@ -1,9 +1,31 @@
+import getToken from "config/api/getToken";
+import Button from "elements/button";
 import React from "react";
 import { useSelector } from "react-redux";
 import ListSidebar from "./ListSidebar";
+import publicApi from "config/api/publicApi";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Sidebar() {
-  const detailData = useSelector((state) => state.dataDetailCourses.data.data);
+  const dataDetail = useSelector((state) => state.dataDetailCourses.data.data);
+  const courseId = dataDetail.course_id;
+  const [detailData, setDetailData] = useState({});
+  const config = getToken();
+  const urlApi = publicApi();
+
+  const fetchData = async () => {
+    const response = await axios
+      .get(`${urlApi}/api/v1/courses/${courseId}`, config)
+      .catch((err) => {
+        console.log(err);
+      });
+    setDetailData(response.data.data);
+  };
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courseId]);
 
   return (
     <>
@@ -59,6 +81,41 @@ export default function Sidebar() {
                 />
               );
             })}
+          <li className="nav-item">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a
+              className="nav-link collapsed"
+              href="#"
+              type="link"
+              data-toggle="collapse"
+              data-target={`#modulReview`}
+              aria-expanded="true"
+              aria-controls={`modulReview`}
+            >
+              <i className="fas fa-fw fa-book" />
+              <span>Review</span>
+            </a>
+            <div
+              id={`modulReview`}
+              className="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordionSidebar"
+            >
+              <div className="bg-white py-2 collapse-inner rounded">
+                <h6 className="collapse-header">Review:</h6>
+
+                <>
+                  <Button
+                    type="link"
+                    className="collapse-item"
+                    href={`/belajar/review/${detailData?.course_id}`}
+                  >
+                    <div>Review</div>
+                  </Button>
+                </>
+              </div>
+            </div>
+          </li>
         </>
       </ul>
     </>

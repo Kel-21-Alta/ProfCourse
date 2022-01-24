@@ -223,7 +223,7 @@ export default function DetailKursus(props) {
                 <div>
                   <h5 className="font-weight-bolder">Rank Nilai</h5>
                   <ul>
-                    {detailData?.rangking?.map((item) => {
+                    {detailData?.rangking?.slice(0, 10).map((item) => {
                       return (
                         <li>
                           {item.name_user}{" "}
