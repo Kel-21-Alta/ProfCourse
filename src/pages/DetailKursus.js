@@ -10,7 +10,11 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Cookies from "js-cookie";
-import { setComments, setCoursesDetail } from "redux/actions/coursesAction";
+import {
+  removeSelectedComments,
+  setComments,
+  setCoursesDetail,
+} from "redux/actions/coursesAction";
 import { toast, ToastContainer } from "react-toastify";
 import LoadingElements from "parts/LoadingElements";
 
@@ -21,7 +25,7 @@ export default function DetailKursus(props) {
   const dataComments = useSelector(
     (state) => state?.dataCommentsId?.data?.data
   );
-  const idCourses = useParams()?.id;
+  const idCourses = useParams().id;
   const dispatch = useDispatch();
   const urlApi = publicApi();
   const token = Cookies.get("token");
@@ -61,7 +65,7 @@ export default function DetailKursus(props) {
           console.log(err);
         });
       const responseComments = await axios
-        .get(`${urlApi}/api/v1/courses/${idCourses}/feedback`, config)
+        .get(`${urlApi}/api/v1/feedback/course/${idCourses}`, config)
         .catch((err) => {
           console.log(err);
         });
@@ -70,6 +74,9 @@ export default function DetailKursus(props) {
       dispatch(setComments(responseComments.data));
     };
     fetchData();
+    return () => {
+      dispatch(removeSelectedComments());
+    };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idCourses]);
@@ -143,13 +150,23 @@ export default function DetailKursus(props) {
                         <div className="text-right mb-3 font-weight-bold">
                           <span>{detailData?.info_user.progress} %</span>
                         </div>
-                        <Button
-                          className="btn btn-block btn-success"
-                          type="link"
-                          href={`/belajar/${detailData?.course_id}`}
-                        >
-                          Lanjutkan Belajar
-                        </Button>
+                        {detailData?.info_user.progress >= 100 ? (
+                          <Button
+                            className="btn btn-block btn-warning"
+                            type="link"
+                            href={`/unduh-sertifikat/${detailData?.course_id}`}
+                          >
+                            Unduh Sertifikat
+                          </Button>
+                        ) : (
+                          <Button
+                            className="btn btn-block btn-success"
+                            type="link"
+                            href={`/belajar/${detailData?.course_id}`}
+                          >
+                            Lanjutkan Belajar
+                          </Button>
+                        )}
                       </>
                     ) : (
                       <Button
@@ -174,15 +191,18 @@ export default function DetailKursus(props) {
                     <div className="col-auto">
                       <h3 className="font-weight-bolder">Modul 1</h3>
                       <ul>
-                        {detailData?.moduls?.map((item) => {
-                          return (
-                            <li>
-                              <Button type="link" href="#">
-                                {item.name_modul}
-                              </Button>
-                            </li>
-                          );
-                        })}
+                        {detailData?.moduls
+                          ?.slice(0)
+                          .reverse()
+                          .map((item) => {
+                            return (
+                              <li>
+                                <Button type="link" href="#">
+                                  {item.name_modul}
+                                </Button>
+                              </li>
+                            );
+                          })}
                       </ul>
                     </div>
                   </div>
@@ -223,7 +243,7 @@ export default function DetailKursus(props) {
                       key={item.name_user}
                       name_user={item.name_user}
                       rating={item.rating}
-                      url={item.url}
+                      url={item.url_image}
                       body={item.body}
                     ></Comments>
                   </div>

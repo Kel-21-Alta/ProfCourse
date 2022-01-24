@@ -19,3 +19,9 @@ export const setComments = (data) => {
     payload: data,
   };
 };
+
+export const removeSelectedComments = () => {
+  return {
+    type: ActionTypes.REMOVE_SELECTED_COMMENTS,
+  };
+};

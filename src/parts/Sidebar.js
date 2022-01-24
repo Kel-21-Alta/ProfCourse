@@ -45,19 +45,21 @@ export default function Sidebar() {
         <hr className="sidebar-divider my-0" />
         <hr className="sidebar-divider" />
         <div className="sidebar-heading">{detailData?.name_course}</div>
-        {detailData?.moduls
-          ?.slice(0)
-          .reverse()
-          .map((item, x) => {
-            return (
-              <ListSidebar
-                key={x}
-                name_modul={item?.name_modul}
-                x={x}
-                modul_id={item?.modul_id}
-              />
-            );
-          })}
+        <>
+          {detailData?.moduls
+            ?.slice(0)
+            .reverse()
+            .map((item, x) => {
+              return (
+                <ListSidebar
+                  key={x}
+                  name_modul={item?.name_modul}
+                  x={x}
+                  modul_id={item?.modul_id}
+                />
+              );
+            })}
+        </>
       </ul>
     </>
   );

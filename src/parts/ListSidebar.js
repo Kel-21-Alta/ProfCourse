@@ -51,15 +51,6 @@ export default function ListSidebar(props) {
           <div className="bg-white py-2 collapse-inner rounded">
             <h6 className="collapse-header">Materi:</h6>
             {dataMateri?.materi?.map((item) => {
-              // const fetchDataKuis = async () => {
-              //   const responseData = await axios
-              //     .get(`${urlApi}/api/v1/quizs/modul/${idModul}`, config)
-              //     .catch((err) => {
-              //       console.log(err);
-              //     });
-              //   setDataKuis(responseData?.data?.data);
-              // };
-              // fetchDataKuis();
               return (
                 <>
                   <Button
