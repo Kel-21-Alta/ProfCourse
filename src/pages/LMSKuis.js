@@ -11,7 +11,6 @@ import { setQuizAction } from "redux/actions/quizAction";
 
 export default function LMSKuis() {
   const [dataKuis, setDataKuis] = useState([]);
-  const [dataHehe, setDataHehe] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingSend, setLoadingSend] = useState(false);
 
@@ -52,7 +51,6 @@ export default function LMSKuis() {
     if (response.status > 400) {
       console.log("err");
     } else {
-      setDataHehe(response.data);
       setLoadingSend(false);
       setTimeout(() => {
         dispatch(setQuizAction(response.data.data));
