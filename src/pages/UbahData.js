@@ -70,7 +70,6 @@ export default function UbahData() {
       [name]: value,
     });
   };
-  console.log("Data user ", data);
   const token = getToken();
   const publicApis = publicApi();
   const dataSend = {

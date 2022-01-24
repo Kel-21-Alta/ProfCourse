@@ -1,16 +1,31 @@
+import axios from "axios";
+import getToken from "config/api/getToken";
+import publicApi from "config/api/publicApi";
 import Button from "elements/button";
 import Footer from "parts/Footer";
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function AkunSaya() {
   // const [dataUser, setDataUser] = useState({});
-  // const [loading, setLoading] = useState(false);
-  const dataUser = useSelector((state) => state.dataAccount.data);
+  const [dataUser, setDataUser] = useState({});
   let birthDate = dataUser?.birth?.slice(0, 10);
   let birthDateNew = birthDate?.split("-").reverse().join("-");
+  let urlApi = publicApi();
+  let config = getToken();
+  let dispatch = useDispatch();
 
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios
+        .get(`${urlApi}/api/v1/currentuser`, config)
+        .catch((err) => {
+          console.log(err);
+        });
+      setDataUser(response.data.data);
+      dispatch(setDataUser(response.data.data));
+    };
+    fetchData();
     window.scroll(0, 0);
     document.title = "Profcourse | Akun Saya";
     // eslint-disable-next-line react-hooks/exhaustive-deps

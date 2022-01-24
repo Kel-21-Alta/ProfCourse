@@ -41,7 +41,10 @@ export default function LMSVideo() {
             <div className="container my-5">
               {loading ? (
                 <>
-                  <div className="text-center">
+                  <div
+                    className="container m-auto"
+                    style={{ paddingLeft: "40%", paddingTop: "10%" }}
+                  >
                     <LoadingElements />
                   </div>
                 </>
@@ -52,9 +55,9 @@ export default function LMSVideo() {
                       url={dataMateri?.url_materi}
                       className="react-player"
                       playing
-                      controls
                       width="70%"
                       height="70%"
+                      controls
                       config={{
                         file: { attributes: { controlsList: "nodownload" } },
                       }}

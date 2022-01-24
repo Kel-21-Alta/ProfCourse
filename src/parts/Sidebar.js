@@ -4,6 +4,7 @@ import ListSidebar from "./ListSidebar";
 
 export default function Sidebar() {
   const detailData = useSelector((state) => state.dataDetailCourses.data.data);
+
   return (
     <>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}
@@ -23,15 +24,18 @@ export default function Sidebar() {
                 <div className="d-inline-block ">Progress</div>
               </div>
               <div className="col-md-6">
-                <div className="text-right">25%</div>
+                <div className="text-right">
+                  {detailData?.info_user?.progress}%
+                </div>
               </div>
             </div>
             <div className="progress">
               <div
                 className="progress-bar"
                 role="progressbar"
-                style={{ width: "25%" }}
-                aria-valuenow={25}
+                style={{ width: `${detailData?.info_user?.progress}%` }}
+                // eslint-disable-next-line jsx-a11y/aria-proptypes
+                aria-valuenow={detailData?.info_user?.progress}
                 aria-valuemin={0}
                 aria-valuemax={100}
               ></div>
@@ -41,19 +45,21 @@ export default function Sidebar() {
         <hr className="sidebar-divider my-0" />
         <hr className="sidebar-divider" />
         <div className="sidebar-heading">{detailData?.name_course}</div>
-        {detailData?.moduls
-          ?.slice(0)
-          .reverse()
-          .map((item, x) => {
-            return (
-              <ListSidebar
-                key={x}
-                name_modul={item?.name_modul}
-                x={x}
-                modul_id={item?.modul_id}
-              />
-            );
-          })}
+        <>
+          {detailData?.moduls
+            ?.slice(0)
+            .reverse()
+            .map((item, x) => {
+              return (
+                <ListSidebar
+                  key={x}
+                  name_modul={item?.name_modul}
+                  x={x}
+                  modul_id={item?.modul_id}
+                />
+              );
+            })}
+        </>
       </ul>
     </>
   );

@@ -2,9 +2,14 @@ import Button from "elements/button";
 import Card from "parts/Card";
 import Footer from "parts/Footer";
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function KursusSayaPage(props) {
   let progressBelajar = 60;
+  const dataUser = useSelector((state) => state.dataAccount.data);
+  let name = dataUser;
+  let firstWord = name?.name?.split(" ")[0];
+
   useEffect(() => {
     window.scroll(0, 0);
     document.title = "Profcourse | Kursus Saya";
@@ -14,7 +19,7 @@ export default function KursusSayaPage(props) {
       <div className="container">
         <div className="text-center font-weight-bold">
           <h2>
-            Haloo Agus! <br />
+            Haloo {firstWord}! <br />
             Selamat Belajar Ilmu Proffesional
           </h2>
         </div>
