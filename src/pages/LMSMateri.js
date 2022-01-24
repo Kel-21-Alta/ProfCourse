@@ -5,16 +5,35 @@ import Button from "elements/button";
 import LoadingElements from "parts/LoadingElements";
 import Sidebar from "parts/Sidebar";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 export default function LMSMateri() {
   const [dataMateri, setDataMateri] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(true);
+  const [done, setDone] = useState(false);
+  const detailData = useSelector((state) => state.dataDetailCourses.data.data);
+
   const urlApi = publicApi();
   const params = useParams().id;
   const config = getToken();
 
+  let dataSend = {
+    course_id: `${detailData.course_id}`,
+    materi_id: `${params}`,
+    is_complate: true,
+    current_time: "times",
+  };
+  const markDone = async () => {
+    setLoading2(true);
+    await axios.put(`${urlApi}/api/v1/materi/progress`, dataSend, config);
+    setDone(true);
+    setLoading2(false);
+  };
+
   useEffect(() => {
+    setLoading2(false);
     window.scroll(0, 0);
     document.title = "Profcourse | Belajar";
     const fetchData = async () => {
@@ -64,6 +83,16 @@ export default function LMSMateri() {
                         Download Materi
                       </Button>
                     </div>
+                  </div>
+                  <div className="text-center">
+                    <Button
+                      className="btn btn-info btn-block"
+                      onClick={markDone}
+                      isLoading={loading2 ? true : false}
+                      isDisabled={done ? true : false}
+                    >
+                      {done ? "Selesai" : "Tandai Selesai"}
+                    </Button>
                   </div>
                 </div>
               )}

@@ -1,10 +1,31 @@
+import getToken from "config/api/getToken";
 import Button from "elements/button";
 import React from "react";
 import { useSelector } from "react-redux";
 import ListSidebar from "./ListSidebar";
+import publicApi from "config/api/publicApi";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Sidebar() {
-  const detailData = useSelector((state) => state.dataDetailCourses.data.data);
+  const dataDetail = useSelector((state) => state.dataDetailCourses.data.data);
+  const courseId = dataDetail.course_id;
+  const [detailData, setDetailData] = useState({});
+  const config = getToken();
+  const urlApi = publicApi();
+
+  const fetchData = async () => {
+    const response = await axios
+      .get(`${urlApi}/api/v1/courses/${courseId}`, config)
+      .catch((err) => {
+        console.log(err);
+      });
+    setDetailData(response.data.data);
+  };
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courseId]);
 
   return (
     <>
