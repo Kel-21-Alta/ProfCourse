@@ -116,7 +116,7 @@ export default function DetailKursus(props) {
                   style={{ width: "570px", height: "250px" }}
                 >
                   <img
-                    src="https://picsum.photos/seed/picsum/450/300"
+                    src={detailData?.url_image}
                     width="100%"
                     height="100%"
                     alt=""
@@ -125,10 +125,16 @@ export default function DetailKursus(props) {
                 <div className="row  text-left">
                   <div className="col-md-1"></div>
                   <div className="col-md-3 text-left m-0 mt-3 p-0">
-                    <Star value={4} width={35} height={35}></Star>
+                    <Star
+                      value={dataComments?.rating_all}
+                      width={35}
+                      height={35}
+                    ></Star>
                   </div>
                   <div className="col-md-2 mt-3 text-right m-0 p-0">
-                    <h4 className="font-weight-bolder">4/5</h4>
+                    <h4 className="font-weight-bolder">
+                      {Math.floor(dataComments?.rating_all)}/5
+                    </h4>
                   </div>
                   <div className="col-md-6"></div>
 
