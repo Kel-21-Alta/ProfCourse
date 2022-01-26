@@ -5,6 +5,7 @@ import publicApi from "config/api/publicApi";
 import Button from "elements/button";
 import Footer from "parts/Footer";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { toast, ToastContainer } from "react-toastify";
 import { storage } from "../firebase";
 
@@ -22,6 +23,7 @@ export default function BuatKursusBaru(props) {
   const [i_image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
+  const [dataMyCourse, setDataMyCourse] = useState([]);
 
   const onChange = (e) => {
     const name = e.target.name;
@@ -83,12 +85,43 @@ export default function BuatKursusBaru(props) {
       }
     );
   };
+  const urlApi = publicApi();
+  const config = getToken();
+  const [loading2, setLoading2] = useState(false);
 
+  const deleteModulApi = async (id) => {
+    setLoading2(true);
+    const response = await axios
+      .delete(`${publicApis}/api/v1/moduls/${id}`, token)
+      .catch((err) => {
+        setLoading2(false);
+        toast.error("Gagal update data");
+      });
+    if (response.status > 400) {
+      setLoading2(false);
+      toast.error("Gagal update data");
+    } else {
+      toast.success("Sukses update data");
+      setLoading2(false);
+      window.location.reload();
+    }
+  };
   useEffect(() => {
     window.scroll(0, 0);
     console.log(response);
     document.title = "Profcourse | Buat Kursus Baru";
-  });
+    const fetchData = async () => {
+      setLoading(true);
+      const response = await axios
+        .get(`${urlApi}/api/v1/user/courses`, config)
+        .catch((err) => {
+          console.log(err);
+        });
+      setLoading(false);
+      setDataMyCourse(response.data);
+    };
+    fetchData();
+  }, [useParams().id]);
   return (
     <>
       <div className="container">
@@ -117,190 +150,115 @@ export default function BuatKursusBaru(props) {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Kursus Online</td>
-              <td>
-                <span className="text-red font-weight-bolder">Draft</span>
-              </td>
-              <td className="">
-                <button
-                  className="btn btn-info mx-2"
-                  type="link"
-                  isPrimary
-                  data-toggle="modal"
-                  data-target="#exampleModalPer"
-                >
-                  Detail
-                </button>
-                <button
-                  className="btn btn-primary mx-2"
-                  type="link"
-                  isPrimary
-                  data-toggle="modal"
-                  data-target="#exampleModalPer"
-                >
-                  Perbarui
-                </button>
-                <button
-                  className="btn btn-danger"
-                  type="link"
-                  isDanger
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                >
-                  Hapus
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Kursus Online</td>
-              <td>
-                <span className="text-primary font-weight-bolder">
-                  Published
-                </span>
-              </td>
-              <td className="">
-                <button
-                  className="btn btn-info mx-2"
-                  type="link"
-                  isPrimary
-                  data-toggle="modal"
-                  data-target="#exampleModalPer"
-                >
-                  Detail
-                </button>
-                {selesai ? (
+            {dataMyCourse?.data
+              ?.slice(0)
+              .reverse()
+              .map((item, index) => {
+                return (
                   <>
-                    <button
-                      className="btn btn-primary mx-2 cursor-no-drop"
-                      type="link"
-                      isPrimary
-                      data-toggle="modal"
-                      data-target="#exampleModalPer"
-                      disabled
-                    >
-                      Perbarui
-                    </button>
-                    <button
-                      className="btn btn-danger cursor-no-drop"
-                      type="link"
-                      isDanger
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                      disabled
-                    >
-                      Hapus
-                    </button>
+                    <div>
+                      <div
+                        className="modal fade"
+                        id="exampleModal"
+                        tabIndex={-1}
+                        aria-labelledby="exampleModalLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog modal-dialog-centered">
+                          <div className="modal-content">
+                            <div className="modal-header">
+                              <h5
+                                className="modal-title"
+                                id="exampleModalLabel"
+                              >
+                                Hapus
+                              </h5>
+                              <button
+                                type="button"
+                                className="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                              >
+                                <span aria-hidden="true">×</span>
+                              </button>
+                            </div>
+                            <div className="modal-body">
+                              Apakah anda yakin untuk menghapus request course
+                              ini?
+                            </div>
+                            <div className="modal-footer">
+                              <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-dismiss="modal"
+                              >
+                                Tidak
+                              </button>
+                              <Button
+                                type="button"
+                                className="btn btn-danger"
+                                onClick={() => {
+                                  deleteModulApi(item?.course_id);
+                                }}
+                                isLoading={loading2 ? true : false}
+                              >
+                                Ya
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <tr>
+                      <th scope="row">{index + 1}</th>
+                      <td>{item.title}</td>
+                      <td>
+                        {item.publish === 1 ? (
+                          <>
+                            <span className="text-primary font-weight-bolder">
+                              Published
+                            </span>
+                          </>
+                        ) : item.publish === 2 ? (
+                          <>
+                            <span className="text-red font-weight-bolder">
+                              Draft
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-gray-600 font-weight-bolder">
+                              Pending
+                            </span>
+                          </>
+                        )}
+                      </td>
+                      <td className="">
+                        <Button
+                          className="btn btn-info mx-2"
+                          type="link"
+                          isPrimary
+                          href={`/kursus-saya/detail/${item.course_id}`}
+                        >
+                          Detail
+                        </Button>
+                        <button
+                          className="btn btn-danger"
+                          type="link"
+                          isDanger
+                          data-toggle="modal"
+                          data-target="#exampleModal"
+                        >
+                          Hapus
+                        </button>
+                      </td>
+                    </tr>
                   </>
-                ) : (
-                  <>
-                    <button
-                      className="btn btn-primary mx-2"
-                      type="link"
-                      isPrimary
-                      data-toggle="modal"
-                      data-target="#exampleModalPer"
-                    >
-                      Perbarui
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      type="link"
-                      isDanger
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                    >
-                      Hapus
-                    </button>
-                  </>
-                )}
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Kursus Online</td>
-              <td>
-                <span className="text-gray-600 font-weight-bolder">
-                  Pending
-                </span>
-              </td>
-              <td className="">
-                <button
-                  className="btn btn-info mx-2"
-                  type="link"
-                  isPrimary
-                  data-toggle="modal"
-                  data-target="#exampleModalPer"
-                >
-                  Detail
-                </button>
-                <button
-                  className="btn btn-primary mx-2"
-                  type="link"
-                  isPrimary
-                  data-toggle="modal"
-                  data-target="#exampleModalPer"
-                >
-                  Perbarui
-                </button>
-                <button
-                  className="btn btn-danger"
-                  type="link"
-                  isDanger
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                >
-                  Hapus
-                </button>
-              </td>
-            </tr>
+                );
+              })}
           </tbody>
         </table>
         {/* MODAL */}
-        <div>
-          <div
-            className="modal fade"
-            id="exampleModal"
-            tabIndex={-1}
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">
-                    Hapus
-                  </h5>
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  Apakah anda yakin untuk menghapus request course ini?
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-dismiss="modal"
-                  >
-                    Tidak
-                  </button>
-                  <button type="button" className="btn btn-danger">
-                    Ya
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Modal Perbarui */}
         <div>
