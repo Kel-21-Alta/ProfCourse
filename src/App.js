@@ -26,6 +26,7 @@ import DetailSpesialisasi from "pages/DetailSpesialisasi";
 import SearchPage from "pages/SearchPage";
 import LMSScore from "pages/LMSScore";
 import LMSReview from "pages/LMSReview";
+import DetailKursusUser from "pages/DetailKursusUser";
 
 function App() {
   const DefaultContainer = (props) => (
@@ -64,6 +65,14 @@ function App() {
         path="/akun-saya/ubah-password"
         component={UbahPassword}
       />
+      {/* USER CREATE KURSUS */}
+
+      <PrivateRoute
+        exact
+        path="/kursus-saya/detail/:id"
+        component={DetailKursusUser}
+      />
+      {/* END USER CREATE KURSUS */}
     </>
   );
   return (

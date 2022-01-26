@@ -1,14 +1,92 @@
 // import Button from "elements/button";
+import axios from "axios";
+import getToken from "config/api/getToken";
+import publicApi from "config/api/publicApi";
 import Button from "elements/button";
 import Footer from "parts/Footer";
-import { useEffect } from "react";
-// import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import { storage } from "../firebase";
 
 export default function BuatKursusBaru(props) {
-  let selesai = true;
-  //   let [modal1, setModal1] = useState("");
+  // let selesai = true;
+
+  const [data, setData] = useState({
+    judulKursus: "",
+    deskripsiKursus: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [selesai, setSelesai] = useState(false);
+  const [response, setResponse] = useState([]);
+  const [i_image, setImage] = useState("");
+  const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
+
+  const onChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setData({
+      ...data,
+      [name]: value,
+    });
+    console.log(data);
+  };
+  const token = getToken();
+  const publicApis = publicApi();
+  const dataSend = {
+    title: data.judulKursus,
+    description: data.deskripsiKursus,
+    file_image: url,
+  };
+  const sendData = async () => {
+    setLoading(true);
+    const response = await axios
+      .post(`${publicApis}/api/v1/courses`, dataSend, token)
+      .catch((err) => {});
+    if (response.status > 400) {
+      toast.error("Gagal Upload Materi");
+    } else {
+      setResponse(response.data.data);
+      toast.success("Sukses Upload");
+      setSelesai(true);
+      setLoading(false);
+      setTimeout(() => {
+        // history.push("/akun-saya");
+      }, 2500);
+    }
+  };
+  const handleUpload = () => {
+    const uploadTask = storage.ref(`images/${i_image.name}`).put(i_image);
+    uploadTask.on(
+      "state_changed",
+
+      (snapshot) => {
+        setLoading(true);
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setProgress(progress);
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(i_image.name)
+          .getDownloadURL()
+          .then((url) => {
+            setUrl(url);
+            setLoading(false);
+          });
+      }
+    );
+  };
+
   useEffect(() => {
     window.scroll(0, 0);
+    console.log(response);
     document.title = "Profcourse | Buat Kursus Baru";
   });
   return (
@@ -33,7 +111,7 @@ export default function BuatKursusBaru(props) {
           <thead>
             <tr>
               <th scope="col">Nomor</th>
-              <th scope="col">Judu; Kursus</th>
+              <th scope="col">Judul Kursus</th>
               <th scope="col">Status</th>
               <th scope="col">Aksi</th>
             </tr>
@@ -182,7 +260,6 @@ export default function BuatKursusBaru(props) {
         </table>
         {/* MODAL */}
         <div>
-          {/* Modal Hapus*/}
           <div
             className="modal fade"
             id="exampleModal"
@@ -224,7 +301,6 @@ export default function BuatKursusBaru(props) {
             </div>
           </div>
         </div>
-        {/* End modal Hapus */}
 
         {/* Modal Perbarui */}
         <div>
@@ -309,8 +385,6 @@ export default function BuatKursusBaru(props) {
         </div>
         {/* End Modal Perbarui */}
 
-        {/* END MODAL */}
-
         {/* MODAL BUAT COURSE */}
         <div>
           {/* Modal Hapus*/}
@@ -340,30 +414,65 @@ export default function BuatKursusBaru(props) {
                   <div className="row">
                     <div className="col-md-6">
                       <img
-                        src="https://picsum.photos/200/300"
+                        src={
+                          url === ""
+                            ? "https://www.taawon.com/images_default/default.jpg"
+                            : url
+                        }
                         className="card-img my-3"
                         alt="..."
                         height={180}
                         width={342}
                         style={{ objectFit: "cover" }}
                       />
-                      <input type="file" name="" id="" />
+                      <input
+                        type="file"
+                        name="image"
+                        id="image"
+                        onChange={(e) => {
+                          setImage(e.target.files[0]);
+                        }}
+                      />
+                      <div className="row">
+                        <div className="col-md-6">
+                          <Button
+                            className="btn btn-primary mt-2"
+                            onClick={handleUpload}
+                          >
+                            Upload Image
+                          </Button>
+                        </div>
+                        <div className="col-md-6">
+                          <div className="text-right mb-1 mt-1 font-weight-bold">
+                            {progress} %
+                          </div>
+                          <div className="progress mb-2">
+                            <div
+                              className="progress-bar"
+                              role="progressbar"
+                              style={{ width: `${progress}%` }}
+                              aria-valuenow={progress}
+                              aria-valuemin={0}
+                              aria-valuemax={100}
+                            ></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div className="col-md-6">
                       <form action="#" className="signin-form">
                         <div className="form-group mb-3">
                           <div>
-                            <label htmlFor="exampleFormControlSelect1">
-                              Bidang Kursus
-                            </label>
-                            <select
+                            <label htmlFor="#judulKursus">Judul Kursus</label>
+                            <input
+                              id="judulKursus"
+                              name="judulKursus"
+                              type="text"
                               className="form-control"
-                              id="exampleFormControlSelect1"
-                            >
-                              <option>Kursus Online</option>
-                              <option>Konseling</option>
-                              <option>Training</option>
-                            </select>
+                              placeholder="Judul kursus anda..."
+                              onChange={onChange}
+                              required
+                            />
                           </div>
                         </div>
                         <div className="form-group mb-3">
@@ -371,12 +480,14 @@ export default function BuatKursusBaru(props) {
                             className="font-weight-normal"
                             htmlFor="topikKursus"
                           >
-                            Topik Kursus
+                            Deskripsi
                           </label>
-                          <input
+                          <textarea
                             type="text"
+                            name="deskripsiKursus"
                             className="form-control"
                             placeholder="Topik kursus anda..."
+                            onChange={onChange}
                             required
                           />
                         </div>
@@ -390,9 +501,31 @@ export default function BuatKursusBaru(props) {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="button" className="btn btn-primary">
-                    Lanjut
-                  </button>
+                  {selesai ? (
+                    <>
+                      <h5>Upload Selesai</h5>
+                      <Button
+                        type="link"
+                        className="btn btn-danger"
+                        href={`/kursus-saya/detail/${response.id}`}
+                        isLoading={loading ? true : false}
+                        isExternal
+                      >
+                        Lanjut
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button
+                        type="button"
+                        className="btn btn-primary"
+                        isLoading={loading ? true : false}
+                        onClick={sendData}
+                      >
+                        Lanjut
+                      </Button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -403,6 +536,7 @@ export default function BuatKursusBaru(props) {
       <div className="mt-5">
         <Footer></Footer>
       </div>
+      <ToastContainer></ToastContainer>
     </>
   );
 }
