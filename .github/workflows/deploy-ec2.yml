@@ -5,9 +5,9 @@ on:
       - 'development'
       - '13-CI/CD'
       - '14-LMS'
-  # pull_request:
-  #   branches:
-  #     - development
+  pull_request:
+    branches:
+      - development
   #     - main
 
 jobs:
