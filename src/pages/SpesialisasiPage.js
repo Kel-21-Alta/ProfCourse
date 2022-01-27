@@ -55,12 +55,12 @@ export default function SpesialisasiPage(props) {
                   return (
                     <div className="col-md-4 mt-3">
                       <Card
-                        button="Detail Kursus"
-                        key={item.course_id}
-                        course_id={item.course_id}
+                        button="Detail Spesialisasi"
+                        key={item.id}
+                        course_id={item.id}
                         title={item.title}
                         url_image={item.url_image}
-                        urlTarget="detail-kursus"
+                        urlTarget="detail-spesialisasi"
                       ></Card>
                     </div>
                   );

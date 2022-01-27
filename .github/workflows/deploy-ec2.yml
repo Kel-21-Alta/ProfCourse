@@ -5,11 +5,11 @@ on:
       - 'development'
       - '13-CI/CD'
       - '14-LMS'
+  pull_request:
+    branches:
+      - development
       - '19-TambahMateri'
-  # pull_request:
-  #   branches:
-  #     - development
-  #     - main
+  #   - main
 
 jobs:
   build:
