@@ -92,7 +92,7 @@ export default function BuatKursusBaru(props) {
   const deleteModulApi = async (id) => {
     setLoading2(true);
     const response = await axios
-      .delete(`${publicApis}/api/v1/moduls/${id}`, token)
+      .delete(`${publicApis}/api/v1/courses/${id}`, token)
       .catch((err) => {
         setLoading2(false);
         toast.error("Gagal update data");
