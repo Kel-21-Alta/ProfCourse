@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - 'development'
-      - '13-CI/CD'
-      - '14-LMS'
+      - '20-FixBug'
   pull_request:
     branches:
       - development
