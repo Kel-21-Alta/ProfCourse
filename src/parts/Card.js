@@ -9,7 +9,7 @@ export default function Card(props) {
         style={{ width: "342", height: "316" }}
       >
         <img
-          src="https://picsum.photos/200/300"
+          src={props.url_image}
           className="card-img-top"
           alt="..."
           height={180}
