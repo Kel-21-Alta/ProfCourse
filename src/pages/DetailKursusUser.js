@@ -18,7 +18,7 @@ export default function DetailKursusUser() {
 
   const [data, setData] = useState({
     namaModul: "",
-    sektor: "",
+    sektor: "1",
     namaMateri: "",
     fileMateri: "",
   });
@@ -93,7 +93,7 @@ export default function DetailKursusUser() {
         `${publicApis}/api/v1/materi`,
         {
           modul_id: id,
-          type_materi: data.sektor,
+          type_materi: parseInt(data.sektor),
           title: data.namaMateri,
           file_materi: url,
           order: 1,
@@ -103,7 +103,6 @@ export default function DetailKursusUser() {
       .catch((err) => {
         setLoading2(false);
         toast.error("Gagal update data");
-        window.location.reload();
       });
     if (response.status > 400) {
       setLoading2(false);
@@ -429,10 +428,10 @@ export default function DetailKursusUser() {
                                         id="sektor"
                                         onChange={onChange}
                                       >
-                                        <option value="1" selected>
+                                        <option value={1} selected>
                                           Materi PDF/PPT
                                         </option>
-                                        <option value="2">Video</option>
+                                        <option value={2}>Video</option>
                                       </select>
                                       <label htmlFor="#namaMateri">
                                         Judul Materi
@@ -544,7 +543,7 @@ export default function DetailKursusUser() {
                                   </button>
                                 </div>
                               </div>
-                              <ListMateri></ListMateri>
+                              <ListMateri id={item?.modul_id}></ListMateri>
                               <div className="text-right mt-3">
                                 <button
                                   className="btn btn-primary"
@@ -570,21 +569,11 @@ export default function DetailKursusUser() {
                   <p style={{ fontSize: "20px" }}>
                     {" "}
                     <i className="fas fa-user-friends	px-3"></i>{" "}
-                    {kursus?.user_taken_course} Orang mengambil kursus ini
+                    {kursus?.data?.user_taken_course === 0
+                      ? "Belum ada "
+                      : kursus?.data?.user_taken_course}{" "}
+                    orang mengambil kursus ini
                   </p>
-                </div>
-                <div>
-                  <h5 className="font-weight-bolder">Rank Nilai</h5>
-                  <ul>
-                    {kursus?.rangking?.slice(0, 10).map((item) => {
-                      return (
-                        <li>
-                          {item.name_user}{" "}
-                          <div className="text-right">{item.skor}pts</div>
-                        </li>
-                      );
-                    })}
-                  </ul>
                 </div>
               </div>
             </div>
