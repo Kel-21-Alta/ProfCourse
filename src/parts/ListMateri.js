@@ -5,6 +5,7 @@ import Button from "elements/button";
 import React from "react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import ModalUbahMateri from "./ModalUbahMateri";
 
 export default function ListMateri(props) {
   const [dataMateri, setDataMateri] = useState([]);
@@ -29,6 +30,9 @@ export default function ListMateri(props) {
       window.location.reload();
     }
   };
+
+  // Ubah Materi
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios
@@ -118,6 +122,16 @@ export default function ListMateri(props) {
                   </div>
                 </div>
 
+                <ModalUbahMateri
+                  key={index}
+                  index={index}
+                  id={item.id}
+                  title={item?.title}
+                  type={item?.type}
+                  url={item?.url_materi}
+                  id_modul={props.id}
+                ></ModalUbahMateri>
+
                 {/* end Modal */}
                 <div
                   className="row rounded mt-2"
@@ -133,9 +147,14 @@ export default function ListMateri(props) {
                     </ul>
                   </div>
                   <div className="col-md-6 text-right">
-                    <Button className="btn mr-2" type="link">
+                    <button
+                      className="btn mr-2"
+                      type="link"
+                      data-toggle="modal"
+                      data-target={`#ubahMateri${index}`}
+                    >
                       Ubah
-                    </Button>
+                    </button>
                     <button
                       className="btn "
                       data-toggle="modal"

@@ -569,21 +569,11 @@ export default function DetailKursusUser() {
                   <p style={{ fontSize: "20px" }}>
                     {" "}
                     <i className="fas fa-user-friends	px-3"></i>{" "}
-                    {kursus?.user_taken_course} Orang mengambil kursus ini
+                    {kursus?.data?.user_taken_course === 0
+                      ? "Belum ada "
+                      : kursus?.data?.user_taken_course}{" "}
+                    orang mengambil kursus ini
                   </p>
-                </div>
-                <div>
-                  <h5 className="font-weight-bolder">Rank Nilai</h5>
-                  <ul>
-                    {kursus?.rangking?.slice(0, 10).map((item) => {
-                      return (
-                        <li>
-                          {item.name_user}{" "}
-                          <div className="text-right">{item.skor}pts</div>
-                        </li>
-                      );
-                    })}
-                  </ul>
                 </div>
               </div>
             </div>
