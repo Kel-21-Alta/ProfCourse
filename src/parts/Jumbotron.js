@@ -32,7 +32,13 @@ const Jumbotron = () => {
             melakukan upgrade skill yang dimiliki saat ini agar selalu menjadi
             yang terbaik
           </p>
-          <Button className="btn px-5 shadow mb-0" hasShadow isPrimary>
+          <Button
+            className="btn px-5 shadow mb-0"
+            href="/kursus"
+            type="link"
+            hasShadow
+            isPrimary
+          >
             Mulai Sekarang
           </Button>
           <div className="row mt-4 ">

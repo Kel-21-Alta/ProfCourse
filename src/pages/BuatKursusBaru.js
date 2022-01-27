@@ -92,7 +92,7 @@ export default function BuatKursusBaru(props) {
   const deleteModulApi = async (id) => {
     setLoading2(true);
     const response = await axios
-      .delete(`${publicApis}/api/v1/moduls/${id}`, token)
+      .delete(`${publicApis}/api/v1/courses/${id}`, token)
       .catch((err) => {
         setLoading2(false);
         toast.error("Gagal update data");
@@ -160,7 +160,7 @@ export default function BuatKursusBaru(props) {
                     <div>
                       <div
                         className="modal fade"
-                        id="exampleModal"
+                        id={`exampleModal${index}`}
                         tabIndex={-1}
                         aria-labelledby="exampleModalLabel"
                         aria-hidden="true"
@@ -199,7 +199,7 @@ export default function BuatKursusBaru(props) {
                                 type="button"
                                 className="btn btn-danger"
                                 onClick={() => {
-                                  deleteModulApi(item?.course_id);
+                                  deleteModulApi(item.course_id);
                                 }}
                                 isLoading={loading2 ? true : false}
                               >
@@ -248,7 +248,7 @@ export default function BuatKursusBaru(props) {
                           type="link"
                           isDanger
                           data-toggle="modal"
-                          data-target="#exampleModal"
+                          data-target={`#exampleModal${index}`}
                         >
                           Hapus
                         </button>

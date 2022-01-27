@@ -30,6 +30,7 @@ export default function LMSMateri() {
     await axios.put(`${urlApi}/api/v1/materi/progress`, dataSend, config);
     setDone(true);
     setLoading2(false);
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -98,7 +99,7 @@ export default function LMSMateri() {
               )}
             </div>
           </div>
-          <div>
+          {/* <div>
             <div className="container my-5">
               <div className="row">
                 <div className="col-md-6">
@@ -115,7 +116,7 @@ export default function LMSMateri() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <footer className="sticky-footer bg-white">
             <div className="container my-auto">
               <div className="copyright text-center my-auto">
