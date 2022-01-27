@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "assets/images/logo/logo.svg";
+import Button from "elements/button";
 
 export default function Footer() {
   return (
@@ -17,10 +18,9 @@ export default function Footer() {
             <h6 className="mt-2">Kursus</h6>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
-                <a href="/">Kursus Terbaru</a>
-              </li>
-              <li className="list-group-item">
-                <a href="/">Kursus Favorit</a>
+                <Button type="link" href="/kursus">
+                  Kursus Terbaru
+                </Button>
               </li>
             </ul>
           </div>
@@ -28,10 +28,7 @@ export default function Footer() {
             <h6 className="mt-2">Spesialisasi</h6>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
-                <a href="/careers">Spesialisasi Favorit</a>
-              </li>
-              <li className="list-group-item">
-                <a href="/privacy">Spesialisasi Terbaru</a>
+                <a href="/spesialisasi">Spesialisasi Terbaru</a>
               </li>
             </ul>
           </div>
@@ -39,7 +36,7 @@ export default function Footer() {
             <h6 className="mt-2">Connect Us</h6>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
-                <a href="mailto:support@staycation.id">support@profcourse.id</a>
+                <a href="mailto:support@profcourse.id">support@profcourse.id</a>
               </li>
               <li className="list-group-item">
                 <a href="tel:+6285812557541">0858-1255-7541</a>

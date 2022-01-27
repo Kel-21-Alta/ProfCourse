@@ -154,7 +154,7 @@ export default function LMSKuis() {
             </div>
 
             {/* {console.log("arrayJawaban ", arrayJawaban)} */}
-            <div>
+            {/* <div>
               <div className="container my-5">
                 <div className="row">
                   <div className="col-md-6">
@@ -171,7 +171,7 @@ export default function LMSKuis() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <footer className="sticky-footer bg-white">
               <div className="container my-auto">
                 <div className="copyright text-center my-auto">

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import Button from "elements/button";
+// import Button from "elements/button";
 import Sidebar from "parts/Sidebar";
 import LMSStarter from "./LMSStarter";
-import { useRouteMatch } from "react-router-dom";
+// import { useRouteMatch } from "react-router-dom";
 
 export default function LMSHome(props) {
-  let { url } = useRouteMatch();
+  // let { url } = useRouteMatch();
   useEffect(() => {
     window.scroll(0, 0);
     document.title = "Profcourse | Belajar";
@@ -22,7 +22,7 @@ export default function LMSHome(props) {
             </div>
           </div>
 
-          <div>
+          {/* <div>
             <div className="container my-5">
               <div className="row">
                 <div className="col-md-6">
@@ -39,7 +39,7 @@ export default function LMSHome(props) {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <footer className="sticky-footer bg-white">
             <div className="container my-auto">
               <div className="copyright text-center my-auto">

@@ -1,4 +1,4 @@
-import Button from "elements/button";
+// import Button from "elements/button";
 import Sidebar from "parts/Sidebar";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -25,7 +25,7 @@ export default function LMSScore() {
           </div>
 
           {/* {console.log("arrayJawaban ", arrayJawaban)} */}
-          <div>
+          {/* <div>
             <div className="container my-5">
               <div className="row">
                 <div className="col-md-6">
@@ -42,7 +42,7 @@ export default function LMSScore() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <footer className="sticky-footer bg-white">
             <div className="container my-auto">
               <div className="copyright text-center my-auto">
