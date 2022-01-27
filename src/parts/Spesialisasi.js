@@ -14,7 +14,6 @@ export default function Spesialisasi(props) {
 
   useEffect(() => {
     getSpesialisasiList();
-    console.log("DATAAA ", dataSpesialisasi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (

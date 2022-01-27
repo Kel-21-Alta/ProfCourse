@@ -1,9 +1,32 @@
+import getToken from "config/api/getToken";
+import Button from "elements/button";
 import React from "react";
 import { useSelector } from "react-redux";
 import ListSidebar from "./ListSidebar";
+import publicApi from "config/api/publicApi";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Sidebar() {
-  const detailData = useSelector((state) => state.dataDetailCourses.data.data);
+  const dataDetail = useSelector((state) => state.dataDetailCourses.data.data);
+  const courseId = dataDetail.course_id;
+  const [detailData, setDetailData] = useState({});
+  const config = getToken();
+  const urlApi = publicApi();
+
+  const fetchData = async () => {
+    const response = await axios
+      .get(`${urlApi}/api/v1/courses/${courseId}`, config)
+      .catch((err) => {
+        console.log(err);
+      });
+    setDetailData(response.data.data);
+  };
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courseId]);
+
   return (
     <>
       {/* eslint-disable jsx-a11y/anchor-is-valid */}
@@ -23,15 +46,18 @@ export default function Sidebar() {
                 <div className="d-inline-block ">Progress</div>
               </div>
               <div className="col-md-6">
-                <div className="text-right">25%</div>
+                <div className="text-right">
+                  {detailData?.info_user?.progress}%
+                </div>
               </div>
             </div>
             <div className="progress">
               <div
                 className="progress-bar"
                 role="progressbar"
-                style={{ width: "25%" }}
-                aria-valuenow={25}
+                style={{ width: `${detailData?.info_user?.progress}%` }}
+                // eslint-disable-next-line jsx-a11y/aria-proptypes
+                aria-valuenow={detailData?.info_user?.progress}
                 aria-valuemin={0}
                 aria-valuemax={100}
               ></div>
@@ -41,16 +67,56 @@ export default function Sidebar() {
         <hr className="sidebar-divider my-0" />
         <hr className="sidebar-divider" />
         <div className="sidebar-heading">{detailData?.name_course}</div>
-        {detailData?.moduls?.map((item, x) => {
-          return (
-            <ListSidebar
-              key={x}
-              name_modul={item?.name_modul}
-              x={x}
-              modul_id={item?.modul_id}
-            />
-          );
-        })}
+        <>
+          {detailData?.moduls
+            ?.slice(0)
+            .reverse()
+            .map((item, x) => {
+              return (
+                <ListSidebar
+                  key={x}
+                  name_modul={item?.name_modul}
+                  x={x}
+                  modul_id={item?.modul_id}
+                />
+              );
+            })}
+          <li className="nav-item">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+            <a
+              className="nav-link collapsed"
+              href="#"
+              type="link"
+              data-toggle="collapse"
+              data-target={`#modulReview`}
+              aria-expanded="true"
+              aria-controls={`modulReview`}
+            >
+              <i className="fas fa-fw fa-book" />
+              <span>Review</span>
+            </a>
+            <div
+              id={`modulReview`}
+              className="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordionSidebar"
+            >
+              <div className="bg-white py-2 collapse-inner rounded">
+                <h6 className="collapse-header">Review:</h6>
+
+                <>
+                  <Button
+                    type="link"
+                    className="collapse-item"
+                    href={`/belajar/review/${detailData?.course_id}`}
+                  >
+                    <div>Review</div>
+                  </Button>
+                </>
+              </div>
+            </div>
+          </li>
+        </>
       </ul>
     </>
   );

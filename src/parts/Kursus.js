@@ -59,7 +59,7 @@ export default function Kursus(props) {
       </div>
       <div className="row">
         <div className="w-100 text-right mt-4">
-          <Button type="link" href="/lupa-password">
+          <Button type="link" href="/kursus">
             <h5>Lainnya...</h5>
           </Button>
         </div>

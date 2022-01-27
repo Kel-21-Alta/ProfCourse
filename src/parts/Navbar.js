@@ -26,16 +26,12 @@ export default function Navbar(props) {
   };
 
   let params = useLocation();
+  console.log(params.pathname.slice(0, 8));
 
   return (
     <header
       className={
-        params.pathname === "/belajar" ||
-        params.pathname === "/belajar/materi/:id" ||
-        params.pathname === "/belajar/video/:id" ||
-        params.pathname === "/belajar/kuis/:id"
-          ? "mb-0"
-          : "spacing-sm"
+        params.pathname.slice(0, 8) === "/belajar" ? "mb-0" : "spacing-sm"
       }
     >
       <div className="container">
@@ -71,17 +67,18 @@ export default function Navbar(props) {
               </li>
               <li className={`nav-item ${getNavLinkClass("/tentang-kami")}`}>
                 <Button className="nav-link" type="link" href="/tentang-kami">
-                  Tentang Kami
+                  Tentang
                 </Button>
               </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <input
-                className="form-control mr-sm-2 px-3"
+                className="form-control mr-sm-2 px-3 "
                 style={{
                   background: "#E5E5E5",
                   outlineColor: "#E5E5E5",
                   borderRadius: "15px",
+                  width: "70%",
                 }}
                 type="search"
                 onChange={(e) => {
