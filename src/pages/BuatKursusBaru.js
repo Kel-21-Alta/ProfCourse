@@ -121,6 +121,7 @@ export default function BuatKursusBaru(props) {
       setDataMyCourse(response.data);
     };
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [useParams().id]);
   return (
     <>

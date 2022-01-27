@@ -19,6 +19,7 @@ export default function Navbar(props) {
   };
   const logout = () => {
     Cookies.remove("token");
+    localStorage.removeItem("persist:root");
     toast.success("Logout sukses");
     setTimeout(() => {
       history.push("/masuk");
