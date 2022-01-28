@@ -9,7 +9,7 @@ export default function Card(props) {
         style={{ width: "342", height: "316" }}
       >
         <img
-          src="https://picsum.photos/200/300"
+          src={props.url_image}
           className="card-img-top"
           alt="..."
           height={180}
@@ -21,29 +21,32 @@ export default function Card(props) {
             {props.title}
           </h4>
           {props.barLoading ? (
-            <div className="progress mb-3">
-              <div
-                className="progress-bar"
-                role="progressbar"
-                style={{ width: `${props.progress}%` }}
-                aria-valuenow={props.progress}
-                aria-valuemin={0}
-                aria-valuemax={100}
-              >
+            <>
+              <div className="progress mb-2">
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  style={{ width: `${props.progress}%` }}
+                  aria-valuenow={props.progress}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                ></div>
+              </div>
+              <div className="text-right mb-1 mt-1 font-weight-bold">
                 {props.progress} %
               </div>
-            </div>
+            </>
           ) : (
             ""
           )}
           <div className="text-center">
             {props.isEnded ? (
-              <Button className="btn px-4 py-2" isDanger isDisabled>
+              <Button className="btn px-4 py-2 btn-block" isDanger isDisabled>
                 {props.button}
               </Button>
             ) : (
               <Button
-                className="btn px-4 py-2"
+                className="btn px-4 py-2 btn-block"
                 type="link"
                 isPrimary
                 href={`/${props.urlTarget}/${props.course_id}`}

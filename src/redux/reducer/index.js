@@ -5,12 +5,14 @@ import {
   dataCoursesDetailUserReducer,
 } from "./dataDetailCoursesReducer";
 import { dataDetailSpesialisasiReducer } from "./dataDetailSpesialisasiReducer";
+import { dataQuizReducer } from "./dataQuizReducer";
 
 const reducers = combineReducers({
   dataAccount: dataAccountReducer,
   dataDetailCourses: dataCoursesDetailUserReducer,
   dataCommentsId: dataCommentsReducer,
   dataSpesialisasi: dataDetailSpesialisasiReducer,
+  dataQuizScore: dataQuizReducer,
 });
 
 export default reducers;

@@ -32,7 +32,13 @@ const Jumbotron = () => {
             melakukan upgrade skill yang dimiliki saat ini agar selalu menjadi
             yang terbaik
           </p>
-          <Button className="btn px-5 shadow mb-0" hasShadow isPrimary>
+          <Button
+            className="btn px-5 shadow mb-0"
+            href="/kursus"
+            type="link"
+            hasShadow
+            isPrimary
+          >
             Mulai Sekarang
           </Button>
           <div className="row mt-4 ">
@@ -86,7 +92,7 @@ const Jumbotron = () => {
               </div>
 
               <h6 className="mt-3">
-                {summary.count_spesialization}{" "}
+                {summary.count_spesiazation}{" "}
                 <span className="text-gray-500 font-weight light">
                   {" "}
                   spesialisasi

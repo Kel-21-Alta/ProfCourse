@@ -11,6 +11,8 @@ export const dataCoursesDetailUserReducer = (
   switch (type) {
     case ActionTypes.SET_DETAIL_COURSES_USER:
       return { ...state, data: payload };
+    case ActionTypes.REMOVE_SELECTED_COURSES:
+      return {};
     default:
       return state;
   }
@@ -23,6 +25,8 @@ export const dataCommentsReducer = (
   switch (type) {
     case ActionTypes.SET_COMMENTS:
       return { ...state, data: payload };
+    case ActionTypes.REMOVE_SELECTED_COMMENTS:
+      return {};
     default:
       return state;
   }

@@ -1,27 +1,30 @@
-import React, { useEffect } from "react";
 // import Button from "elements/button";
 import Sidebar from "parts/Sidebar";
-import LMSStarter from "./LMSStarter";
-// import { useRouteMatch } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
 
-export default function LMSHome(props) {
-  // let { url } = useRouteMatch();
-  useEffect(() => {
-    window.scroll(0, 0);
-    document.title = "Profcourse | Belajar";
-  });
+export default function LMSScore() {
+  const dataComments = useSelector((state) => state?.dataQuizScore?.data);
+
   return (
     <>
-      {/* eslint-disable jsx-a11y/anchor-is-valid */}
       <div className="mt-0 wrapper-sidebar " id="wrapper">
         <Sidebar />
-        <div id="content-wrapper" className="d-flex flex-column">
+        <div id="content-wrapper" className="d-flex flex-column h-screen">
           <div id="content">
             <div className="container my-5">
-              <LMSStarter></LMSStarter>
+              <>
+                <div className="container text-center">
+                  <div className="mt-5">
+                    <h2>Skor Kuis : </h2>
+                    <h1>{dataComments?.skor}</h1>
+                  </div>
+                </div>
+              </>
             </div>
           </div>
 
+          {/* {console.log("arrayJawaban ", arrayJawaban)} */}
           {/* <div>
             <div className="container my-5">
               <div className="row">
@@ -32,7 +35,7 @@ export default function LMSHome(props) {
                   <Button
                     className="btn btn-primary"
                     type="link"
-                    href={`${url}/materi/1231`}
+                    href={`/materi/1231`}
                   >
                     Lanjutkan
                   </Button>

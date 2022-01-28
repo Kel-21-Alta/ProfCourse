@@ -7,9 +7,21 @@ export const setCoursesDetail = (data) => {
   };
 };
 
+export const removeSelectedCourses = () => {
+  return {
+    type: ActionTypes.REMOVE_SELECTED_COURSES,
+  };
+};
+
 export const setComments = (data) => {
   return {
     type: ActionTypes.SET_COMMENTS,
     payload: data,
+  };
+};
+
+export const removeSelectedComments = () => {
+  return {
+    type: ActionTypes.REMOVE_SELECTED_COMMENTS,
   };
 };

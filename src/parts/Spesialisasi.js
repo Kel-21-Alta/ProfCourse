@@ -14,7 +14,6 @@ export default function Spesialisasi(props) {
 
   useEffect(() => {
     getSpesialisasiList();
-    console.log("DATAAA ", dataSpesialisasi);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -28,7 +27,7 @@ export default function Spesialisasi(props) {
             return (
               <div className="col-md-4 mb-4">
                 <Card
-                  button="Detail Kursus"
+                  button="Detail Spesialisasi"
                   key={item.id}
                   course_id={item.id}
                   title={item.title}
